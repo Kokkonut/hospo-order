@@ -3,8 +3,8 @@ const { ApolloServer } = require('apollo-server-express');
 const path = require('path');
 const { typeDefs, resolvers } = require('./schemas');
 const db = require('./config/connection');
-const multer = require('multer');
-const uoload = require('./utils/upload');
+// const multer = require('multer');
+// const upload = require('./utils/upload');
 const { authMiddleware } = require('./utils/auth');
 const upload = require('./utils/upload');
 const app = express();
@@ -31,7 +31,7 @@ const startApolloServer = async (typeDefs, resolvers) => {
   await server.start();
   server.applyMiddleware({ app });
 
-  app.use(upload.single('post_image'));
+  // app.use(upload.single('post_image'));
 
 
 db.once('open', () => {

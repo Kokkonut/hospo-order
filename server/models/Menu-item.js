@@ -23,7 +23,7 @@ const menuItemSchema = new Schema({
         default: Date.now
     },
     imgLocation: {
-        type: String,
+        type: String, //contains the path to the image
         required: false,
         trim: true
     },
