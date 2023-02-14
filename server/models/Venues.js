@@ -1,5 +1,6 @@
 const { Schema, model } = require('mongoose');
 
+const menuSchema = require('./Menus');
 const venueSchema = new Schema({
     name: {
         type: String,
@@ -60,6 +61,8 @@ const venueSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    menus: [menuSchema],
+
     tradingHours: [
         {
           dayOfWeek: String,

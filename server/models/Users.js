@@ -1,4 +1,4 @@
-const { schema } = require('mongoose');
+const { Schema } = require('mongoose');
 const bcrypt = require('bcrypt');
 
 
@@ -60,6 +60,6 @@ userSchema.virtual ('fullName').get(function () {
 }
 );
 
-const User = model('User', userSchema);
+const Users = model('Users', userSchema);
 
-module.exports = User;
+module.exports = Users;
