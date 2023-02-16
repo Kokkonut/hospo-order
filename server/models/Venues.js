@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const menuSchema = require('./Menus');
+// const menuSchema = require('./Menus');
 const venueSchema = new Schema({
     name: {
         type: String,
@@ -61,7 +61,10 @@ const venueSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    menus: [menuSchema],
+    menus: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Menus'
+    }],
 
     tradingHours: [
         {
@@ -78,6 +81,6 @@ const venueSchema = new Schema({
 
 //still need to add past orders.
 
-const Venue = model('Venue', venueSchema);
+const Venues = model('Venues', venueSchema);
 
-module.exports = Venue;
+module.exports = Venues;

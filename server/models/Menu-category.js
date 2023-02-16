@@ -17,13 +17,13 @@ const menuCategorySchema = new Schema({
         type: Date,
         default: Date.now
     },
-    menuItems: [menuItemSchema],
-    // menuItems: [{
-    //     type: Schema.Types.ObjectId,
-    //     ref: 'MenuItem'
-    // }]
+    // menuItems: [menuItemSchema],
+     menuItems: [{
+        type: Schema.Types.ObjectId,
+       ref: 'MenuItem'
+    }]
 
 
 });
-
-module.exports = menuCategorySchema;
+const MenuCategory = mongoose.model('MenuCategory', menuCategorySchema);
+module.exports = MenuCategory;
