@@ -1,0 +1,108 @@
+{
+  "user": {
+    "_id": "exampleId",
+    "firstName": "John",
+    "lastName": "Doe",
+    "email": "johndoe@example.com",
+    "phone": 1234567890,
+    "password": "examplePassword",
+    "fullName": "John Doe"
+  },
+  "venue": {
+    "_id": "exampleVenueId",
+    "name": "Example Venue",
+    "address": "123 Example St",
+    "city": "Example City",
+    "state": "Example State",
+    "zip": 12345,
+    "phone": 1234567890,
+    "email": "examplevenue@example.com",
+    "website": "examplevenue.com",
+    "instagram": "examplevenue_instagram",
+    "facebook": "examplevenue_facebook",
+    "twitter": "examplevenue_twitter",
+    "venueCreated": "2023-02-16T16:44:25.529Z",
+    "tradingHours": [
+      {
+        "dayOfWeek": "Monday",
+        "openTime": "08:00",
+        "closeTime": "17:00",
+        "closed": false
+      },
+      {
+        "dayOfWeek": "Tuesday",
+        "openTime": "08:00",
+        "closeTime": "17:00",
+        "closed": false
+      },
+      {
+        "dayOfWeek": "Wednesday",
+        "openTime": "08:00",
+        "closeTime": "17:00",
+        "closed": false
+      },
+      {
+        "dayOfWeek": "Thursday",
+        "openTime": "08:00",
+        "closeTime": "17:00",
+        "closed": false
+      },
+      {
+        "dayOfWeek": "Friday",
+        "openTime": "08:00",
+        "closeTime": "17:00",
+        "closed": false
+      },
+      {
+        "dayOfWeek": "Saturday",
+        "openTime": "10:00",
+        "closeTime": "15:00",
+        "closed": true
+      },
+      {
+        "dayOfWeek": "Sunday",
+        "openTime": "Closed",
+        "closeTime": "Closed",
+        "closed": true
+      }
+    ],
+
+    "menus": [
+      {
+        "_id": "exampleMenuId",
+        "name": "Example Menu",
+        "description": "Example menu description",
+        "menuCreated": "2023-02-16T16:44:25.529Z",
+        "menuCategory": [
+          {
+            "_id": "exampleMenuCategoryId",
+            "name": "Example Menu Category",
+            "description": "Example menu category description",
+            "menuItems": [
+              {
+                "_id": "exampleMenuItemId",
+                "name": "Example Menu Item",
+                "description": "Example menu item description",
+                "price": 9.99,
+                "itemCreated": "2023-02-16T16:44:25.529Z",
+                "imgLocation": "exampleMenuItemImg.png",
+                "modifier_group": {
+                  "_id": "exampleModifierGroupId",
+                  "name": "Example Modifier Group",
+                  "description": "Example modifier group description",
+                  "modifiers": [
+                    {
+                      "_id": "exampleModifierId",
+                      "name": "Example Modifier",
+                      "price": 1.99
+                    }
+                  ]
+                }
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}

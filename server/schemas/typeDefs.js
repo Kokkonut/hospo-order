@@ -1,6 +1,19 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+type Auth {
+    token: ID!
+    user: User
+    }
+type User {
+    _id: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    phone: Int!
+    password: String!
+    fullName: String
+    }
 type Venue {
     _id: ID!
     name: String!
@@ -54,7 +67,8 @@ type Venue {
   type ModifierGroup {
     _id: ID!
     name: String!
-    price: Float!
+    description: String
+    modifiers: [Modifier]
   }
   type Modifier {
     _id: ID!
@@ -63,6 +77,7 @@ type Venue {
     }
 
   type Query {
+    me: User
     venues: [Venue]
     venue(id: ID!): Venue
     menus: [Menu]
@@ -76,21 +91,32 @@ type Venue {
   }
   
   type Mutation {
+    addUser(firstName: String!, lastName: String!, email: String!, phone: Int!, password: String!): Auth
+    login(email: String!, password: String!): Auth
+
     createVenue(input: VenueInput!): Venue!
     updateVenue(id: ID!, input: VenueInput!): Venue!
     deleteVenue(id: ID!): Venue
+
     createMenu(input: MenuInput!): Menu!
     updateMenu(id: ID!, input: MenuInput!): Menu!
     deleteMenu(id: ID!): Menu
+
     createMenuCategory(input: MenuCategoryInput!): MenuCategory!
     updateMenuCategory(id: ID!, input: MenuCategoryInput!): MenuCategory!
     deleteMenuCategory(id: ID!): MenuCategory
+
     createMenuItem(input: MenuItemInput!): MenuItem!
     updateMenuItem(id: ID!, input: MenuItemInput!): MenuItem!
     deleteMenuItem(id: ID!): MenuItem
+
     createModifierGroup(input: ModifierGroupInput!): ModifierGroup!
     updateModifierGroup(id: ID!, input: ModifierGroupInput!): ModifierGroup!
     deleteModifierGroup(id: ID!): ModifierGroup
+
+    createModifier(input: ModifierInput!): Modifier!
+    updateModifier(id: ID!, input: ModifierInput!): Modifier!
+    deleteModifier(id: ID!): Modifier
   }
   
   input VenueInput {
@@ -138,7 +164,13 @@ type Venue {
   
   input ModifierGroupInput {
     name: String!
-    price: Float!
+    description: String
+    modifiers: [ID!]
   }
+  input ModifierInput {
+    name: String!
+    price: Float!
+    }
+  
     `
-    module.exports = typeDefs;
+module.exports = typeDefs;
