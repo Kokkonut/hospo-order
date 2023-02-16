@@ -1,4 +1,4 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 //This is a subdocument schema for the menu categories it will be used in menues schema
 // const menuItemSchema = require('./Menu-item');
@@ -25,5 +25,5 @@ const menuCategorySchema = new Schema({
 
 
 });
-const MenuCategory = mongoose.model('MenuCategory', menuCategorySchema);
+const MenuCategory = model('MenuCategory', menuCategorySchema);
 module.exports = MenuCategory;
