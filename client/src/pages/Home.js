@@ -1,25 +1,29 @@
 import React from "react";
-// import Cart from "../components/Cart";
-// import CategoryMenu from "../components/CategoryMenu";
+import { Link } from "react-router-dom";
+
+// import MenuCategory from "../components/MenuCategory/MenuCategory";
+
+import { IdcardOutlined, InfoCircleFilled, ShoppingCartOutlined } from '@ant-design/icons';
 
 const Home = () => {
   return (
     <div className="container">
       
-        <img src={'userIcon.img'} />
-        #infoIcon
+      <Link to ="/profile"><IdcardOutlined /></Link>
+      
 
-        <Cart />
+      <InfoCircleFilled />
+      <Link to="/cart"><ShoppingCartOutlined /></Link>
 
-        <img href="heroIMAGE"/>
+      <img href="https://liftlearning.com/wp-content/uploads/2020/09/default-image.png" alt="default"/>
         
-        <div>
-          <img href="heroIMAGE"/>
-            <p>Temp Cafe Name</p>
-            <p>Temp Cafe address</p>
-        </div>
+      <div>
+        <img href="https://liftlearning.com/wp-content/uploads/2020/09/default-image.png" alt="default"/>
+        <p>Temp Cafe Name</p>
+        <p>Temp Cafe address</p>
+      </div>
 
-        <CategoryMenu />
+        {/* <MenuCategory /> */}
 
     </div>
   );
