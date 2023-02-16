@@ -11,6 +11,9 @@ import { setContext } from '@apollo/client/link/context';
 
 // import Home from './pages/Home';
 import Login from './pages/Login';
+import LoginMain from './components/Login/LoginMain';
+import LoginCreate from './components/Login/LoginCreate';
+// import LoginLinks from './components/Login/LoginLinks';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -30,6 +33,8 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
+
+
 function App() {
   return (
     <ApolloProvider client={client}>
@@ -41,8 +46,16 @@ function App() {
       </header>
       <Routes>
       <Route
-          path="/login"
+          path="/"
           element={<Login />}
+        />
+      <Route
+          path="/login"
+          element={<LoginMain />}
+        />
+      <Route
+          path="/signup"
+          element={<LoginCreate />}
         />
               {/* <Route 
                 path="/" 

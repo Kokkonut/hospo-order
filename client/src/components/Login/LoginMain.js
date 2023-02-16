@@ -41,7 +41,7 @@ function LoginMain() {
           <button type="submit">Submit</button>
         </div>
       </form>    
-        <Link to="/signup">← Go back to Signup</Link>
+        <Link to="/">← Go back to Signup</Link>
     </div>
   );
 }
