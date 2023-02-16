@@ -5,18 +5,22 @@ import React from "react";
 const Home = () => {
   return (
     <div className="container">
+      
         <img src={'userIcon.img'} />
         #infoIcon
+
         <Cart />
-        <img href="heroIMAGE">
+
+        <img href="heroIMAGE"/>
+        
         <div>
-            #LOGO
-            #CAFE NAME
-            #CAFE ADDRESS
+          <img href="heroIMAGE"/>
+            <p>Temp Cafe Name</p>
+            <p>Temp Cafe address</p>
         </div>
+
         <CategoryMenu />
-            #DROPDOWN-CATEGORY
-      
+
     </div>
   );
 };
