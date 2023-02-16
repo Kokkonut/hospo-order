@@ -13,6 +13,7 @@ type User {
     phone: Int!
     password: String!
     fullName: String
+    isVenueOwner: Boolean!
     }
 type Venue {
     _id: ID!
@@ -27,7 +28,7 @@ type Venue {
     instagram: String
     facebook: String
     twitter: String
-    venueCreated: String!
+    venueCreated: String
     menus: [Menu]
     tradingHours: [TradingHours]
   }
@@ -43,7 +44,7 @@ type Venue {
     _id: ID!
     name: String!
     description: String
-    menuCreated: String!
+    menuCreated: String
     menuCategory: [MenuCategory]
   }
   
@@ -61,7 +62,7 @@ type Venue {
     price: Float!
     itemCreated: String!
     imgLocation: String
-    modifier_group: ModifierGroup
+    modifierGroups: [ModifierGroup]
   }
   
   type ModifierGroup {
@@ -78,16 +79,24 @@ type Venue {
 
   type Query {
     me: User
+
     venues: [Venue]
     venue(id: ID!): Venue
+
     menus: [Menu]
     menu(id: ID!): Menu
+
     menuCategories: [MenuCategory]
     menuCategory(id: ID!): MenuCategory
+
     menuItems: [MenuItem]
     menuItem(id: ID!): MenuItem
+
     modifierGroups: [ModifierGroup]
     modifierGroup(id: ID!): ModifierGroup
+
+    modifiers: [Modifier]
+    modifier(id: ID!): Modifier
   }
   
   type Mutation {
@@ -159,7 +168,7 @@ type Venue {
     description: String!
     price: Float!
     imgLocation: String
-    modifier_group: ID
+    modifierGroups: [ID!]
   }
   
   input ModifierGroupInput {
