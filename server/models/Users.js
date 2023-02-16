@@ -34,6 +34,10 @@ const userSchema = new Schema({
         type: Date,
         default: Date.now
     },
+    isVenueOwner: {
+        type: Boolean,
+        default: false
+    },
     //still need to add past orders.
 },
 {

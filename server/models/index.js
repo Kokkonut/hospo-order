@@ -1,5 +1,22 @@
-const Users = require('./users');
-const Venues = require('./venues');
+const Venues = require('./Venues');
+const Menus = require('./Menus');
+const Users = require('./Users');
+const MenuCategory = require('./Menu-category');
+const MenuItem = require('./Menu-item');
+const ModifierGroup = require('./Modifier-group');
+const Modifiers = require('./Modifiers');
+// const Orders = require('./Orders');
+// const OrderItems = require('./Order-items');
 
 
-module.exports = { Users, Venues };
+module.exports = { 
+    Menus, 
+    Venues, 
+    Users, 
+    MenuCategory, 
+    MenuItem, 
+    ModifierGroup, 
+    Modifiers, 
+    // Orders, 
+    // OrderItems 
+};

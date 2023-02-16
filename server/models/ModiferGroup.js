@@ -1,6 +1,6 @@
-const { Schema }  = require('mongoose');
+const { Schema } = require('mongoose');
 
-const menuSchema = new Schema({
+const modifierGroupSchema = new Schema({
     name: {
         type: String,
         required: true,
@@ -11,16 +11,15 @@ const menuSchema = new Schema({
         required: false,
         trim: true
     },
-    menuCreated: {
+    modifierGroupCreated: {
         type: Date,
         default: Date.now
     },
-
-    menuCategory: [{
+    modifiers: [{
         type: Schema.Types.ObjectId,
-        ref: 'MenuCategory'
+        ref: 'Modifiers'
     }]
 });
 
-const Menus = mongoose.model('Menus', menuSchema);
-module.exports = Menus;
+const ModifierGroup = mongoose.model('ModifierGroup', modifierGroupSchema);
+module.exports = ModifierGroup;

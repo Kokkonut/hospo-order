@@ -1,40 +1,39 @@
-const express = require('express');
-const { ApolloServer } = require('apollo-server-express');
-const path = require('path');
-const { typeDefs, resolvers } = require('./schemas');
-const db = require('./config/connection');
-const { authMiddleware } = require('./utils/auth');
-const app = express();
-const PORT = process.env.PORT || 3001;
+const jwt = require('jsonwebtoken');
 
+// set token secret and expiration date
+const secret = 'mysecretsshhhhh';
+const expiration = '2h';
 
-const server = new ApolloServer({
-  typeDefs,
-  resolvers,
-  context: authMiddleware,
-});
+module.exports = {
+  // function for our authenticated routes
+  authMiddleware: function ({ req }) {
+    // allows token to be sent via  req.query or headers
+    let token = req.query.token || req.headers.authorization;
 
+    // ["Bearer", "<tokenvalue>"]
+    if (req.headers.authorization) {
+      token = token.split(' ').pop().trim();
+    }
 
+    if (!token) {
+      return req;
+    }
 
-app.use(express.urlencoded({ extended: true }));
-app.use(express.json());
+    // verify token and get user data out of it
+    try {
+      const { data } = jwt.verify(token, secret, { maxAge: expiration });
+      req.user = data;
+    } catch {
+      console.log('Invalid token');
+      return req;
+    }
 
-// if we're in production, serve client/build as static assets
-if (process.env.NODE_ENV === 'production') {
-  app.use(express.static(path.join(__dirname, '../client/build')));
-}
+    // send to next endpoint
+    return req;
+  },
+  signToken: function ({ username, email, _id }) {
+    const payload = { username, email, _id };
 
-const startApolloServer = async (typeDefs, resolvers) => {
-  await server.start();
-  server.applyMiddleware({ app });
-
-
-db.once('open', () => {
-  app.listen(PORT, () => console.log(`🌍 Now listening on localhost:${PORT}`));
-  console.log(`Use GraphQL at http://localhost:${PORT}${server.graphqlPath}`);
-});
-
+    return jwt.sign({ data: payload }, secret, { expiresIn: expiration });
+  },
 };
-
-startApolloServer(typeDefs, resolvers);
-

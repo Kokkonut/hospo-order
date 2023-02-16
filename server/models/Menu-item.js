@@ -18,7 +18,7 @@ const menuItemSchema = new Schema({
         required: true,
         trim: true
     },
-    menuCreated: {
+    itemCreated: {
         type: Date,
         default: Date.now
     },
@@ -27,6 +27,11 @@ const menuItemSchema = new Schema({
         required: false,
         trim: true
     },
+    modifier_group: {
+        type: Schema.Types.ObjectId,
+        ref: 'ModifierGroup'
+    }
 });
 
-module.exports = menuItemSchema;
+const MenuItem = mongoose.model('MenuItem', menuItemSchema);
+module.exports = MenuItem;
