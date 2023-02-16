@@ -154,7 +154,7 @@ type Venue {
   input MenuInput {
     name: String!
     description: String
-    menuCategory: [ID!]
+    menuCategory: [ID]
   }
   
   input MenuCategoryInput {
