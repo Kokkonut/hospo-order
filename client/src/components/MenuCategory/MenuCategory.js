@@ -1,29 +1,43 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
+// import React, { useEffect } from 'react'
 
-import { useQuery } from '@apollo/client';
-import { QUERY_USER } from '../utils/queries';
+// import MenuItem from '../MenuItem/MenuItem';
 
-export default function MenuCategory() {
+// import { useQuery } from '@apollo/client';
+// import { QUERY_VENUE } from '../utils/queries';
 
-  const { data } = useQuery(QUERY_CATEGORY);
-  let menuCategory;
+// import {  } from '../utils/queries';
 
-  if (data) {
-    menuCategory = data.menuCategory;
-  }
+// export default function MenuCategory() {
 
-  return (
-    <div>
-      {menuCategory ? (
+//   const { data } = useQuery(QUERY_VENUE);
+//   let menuCategory;
 
-        <p>
-            {menuCategory.name}
-        </p>
+//   if (data) {
+//     menuCategory = data.menuCategory;
+//   }
 
-        // Menu item
+//   function filterItems() {
+//     if (!menuCategory) {
+//       return state.menuItems;
+//     }
+//   }
 
-      ): null}
-    </div>
-  );
-}
+//   return (
+//     <div>
+//       {menuCategory ? (
+
+//         <p>{menuCategory.name}</p>
+
+//         {filterItems().map((item) => {
+//           <MenuItem 
+//             key={item._id}
+//             _id={item._id}
+//             name={item.name}
+//             price={item.price}
+//           />
+//         })}
+
+//       ): null}
+//     </div>
+//   );
+// }
