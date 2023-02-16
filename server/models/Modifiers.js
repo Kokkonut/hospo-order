@@ -1,4 +1,4 @@
-const { Schema } = require('mongoose');
+const { Schema, model } = require('mongoose');
 
 const modifierGroupSchema = new Schema({
     name: {
@@ -14,5 +14,5 @@ const modifierGroupSchema = new Schema({
 }
 );
 
-const Modifiers = mongoose.model('Modifiers', modifierGroupSchema);
+const Modifiers = model('Modifiers', modifierGroupSchema);
 module.exports = Modifiers;
