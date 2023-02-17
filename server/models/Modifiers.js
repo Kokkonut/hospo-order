@@ -11,6 +11,10 @@ const modifierGroupSchema = new Schema({
         required: true,
         trim: true
     },
+    modifier_group: {
+        type: Schema.Types.ObjectId,
+        ref: 'ModifierGroup'
+    },
 }
 );
 

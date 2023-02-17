@@ -7,7 +7,6 @@ const MenuCategory = require('../models/Menu-category');
 const MenuItem = require('../models/Menu-item');
 const ModifierGroup = require('../models/Modifer-group');
 const Modifiers = require('../models/Modifiers');
-const Menus = require('../models/Menus');
 
 mongoose.connect('mongodb://localhost/hospo-order', { useNewUrlParser: true });
 
@@ -61,34 +60,29 @@ db.once('open', async () => {
 
     const menuCategory = await MenuCategory.create({
       name: 'Coffee Drinks',
-      description: 'Our specialty coffee drinks'
+      description: 'Our specialty coffee drinks',
+      venue: venue._id
     });
 
     const menuItem = await MenuItem.create({
       name: 'Latte',
       description: 'Espresso and steamed milk',
       price: 4.50,
-      imgLocation: '/img/latte.jpg'
+      imgLocation: '/img/latte.jpg',
+      menuCategory: menuCategory._id
     });
 
     const modifierGroup = await ModifierGroup.create({
       name: 'Size',
-      description: 'Choose your size'
+      description: 'Choose your size',
+      menuItem: menuItem._id
     });
 
     const modifier = await Modifiers.create({
       name: 'Large',
-      price: 1.50
+      price: 1.50,
+      modifierGroup: modifierGroup._id
     });
-
-    menuItem.modifier_group = modifierGroup._id;
-    modifierGroup.modifiers.push(modifier._id);
-    menuCategory.menuItems.push(menuItem._id);
-    venue.menus.push(menuCategory._id);
-    await menuItem.save();
-    await modifierGroup.save();
-    await menuCategory.save();
-    await venue.save();
 
     console.log('Seed data added to database.');
   } catch (error) {
@@ -97,4 +91,3 @@ db.once('open', async () => {
     process.exit();
   }
 });
-

@@ -1,10 +1,13 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+scalar Date
+
 type Auth {
     token: ID!
     user: User
-    }
+}
+
 type User {
     _id: ID!
     firstName: String!
@@ -14,8 +17,37 @@ type User {
     password: String!
     fullName: String
     isVenueOwner: Boolean!
-    }
-type Venue {
+}
+type MenuItem {
+    _id: ID!
+    name: String!
+    description: String!
+    price: Float!
+    imgLocation: String
+    modifier_group: ModifierGroup
+  }
+  
+  type ModifierGroup {
+    _id: ID!
+    name: String!
+    description: String
+    modifiers: [Modifier!]!
+  }
+  
+  type Modifier {
+    _id: ID!
+    name: String!
+    price: Float!
+  }
+  
+  type MenuCategory {
+    _id: ID!
+    name: String!
+    description: String
+    menuItems: [MenuItem!]!
+  }
+  
+  type Venue {
     _id: ID!
     name: String!
     address: String!
@@ -28,9 +60,8 @@ type Venue {
     instagram: String
     facebook: String
     twitter: String
-    venueCreated: String
-    menus: [Menu]
-    tradingHours: [TradingHours]
+    menu_category: [MenuCategory!]!
+    tradingHours: [TradingHours!]!
   }
   
   type TradingHours {
@@ -40,92 +71,60 @@ type Venue {
     closed: Boolean!
   }
   
-  type Menu {
-    _id: ID!
-    name: String!
-    description: String
-    menuCreated: String
-    menuCategory: [MenuCategory]
-  }
-  
-  type MenuCategory {
-    _id: ID!
-    name: String!
-    description: String
-    menuItems: [MenuItem]
-  }
-  
-  type MenuItem {
-    _id: ID!
-    name: String!
-    description: String!
-    price: Float!
-    itemCreated: String!
-    imgLocation: String
-    modifierGroups: [ModifierGroup]
-  }
-  
-  type ModifierGroup {
-    _id: ID!
-    name: String!
-    description: String
-    modifiers: [Modifier]
-  }
-  type Modifier {
-    _id: ID!
-    name: String!
-    price: Float!
-    }
-
   type Query {
-    me: User
-
-    venues: [Venue]
-    venue(id: ID!): Venue
-
-    menus: [Menu]
-    menu(id: ID!): Menu
-
-    menuCategories: [MenuCategory]
-    menuCategory(id: ID!): MenuCategory
-
-    menuItems: [MenuItem]
-    menuItem(id: ID!): MenuItem
-
-    modifierGroups: [ModifierGroup]
-    modifierGroup(id: ID!): ModifierGroup
-
-    modifiers: [Modifier]
-    modifier(id: ID!): Modifier
+    getMenuCategoryById(id: ID!): MenuCategory
+    getAllMenuCategories: [MenuCategory!]!
+    getMenuItemById(id: ID!): MenuItem
+    getAllMenuItems: [MenuItem!]!
+    getModifierGroupById(id: ID!): ModifierGroup
+    getAllModifierGroups: [ModifierGroup!]!
+    getModifierById(id: ID!): Modifier
+    getAllModifiers: [Modifier!]!
+    getVenueById(id: ID!): Venue
+    getAllVenues: [Venue!]!
   }
   
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, phone: Int!, password: String!): Auth
     login(email: String!, password: String!): Auth
-
-    createVenue(input: VenueInput!): Venue!
-    updateVenue(id: ID!, input: VenueInput!): Venue!
-    deleteVenue(id: ID!): Venue
-
-    createMenu(input: MenuInput!): Menu!
-    updateMenu(id: ID!, input: MenuInput!): Menu!
-    deleteMenu(id: ID!): Menu
-
     createMenuCategory(input: MenuCategoryInput!): MenuCategory!
     updateMenuCategory(id: ID!, input: MenuCategoryInput!): MenuCategory!
-    deleteMenuCategory(id: ID!): MenuCategory
-
+    deleteMenuCategory(id: ID!): MenuCategory!
     createMenuItem(input: MenuItemInput!): MenuItem!
     updateMenuItem(id: ID!, input: MenuItemInput!): MenuItem!
-    deleteMenuItem(id: ID!): MenuItem
-
+    deleteMenuItem(id: ID!): MenuItem!
     createModifierGroup(input: ModifierGroupInput!): ModifierGroup!
     updateModifierGroup(id: ID!, input: ModifierGroupInput!): ModifierGroup!
-    deleteModifierGroup(id: ID!): ModifierGroup
-
+    deleteModifierGroup(id: ID!): ModifierGroup!
     createModifier(input: ModifierInput!): Modifier!
     updateModifier(id: ID!, input: ModifierInput!): Modifier!
-    deleteModifier(id: ID!): Modifier
+    deleteModifier(id: ID!): Modifier!
+    createVenue(input: VenueInput!): Venue!
+    updateVenue(id: ID!, input: VenueInput!): Venue!
+    deleteVenue(id: ID!): Venue!
+  }
+  
+  input MenuItemInput {
+    name: String!
+    description: String!
+    price: Float!
+    imgLocation: String
+    modifier_group: ID
+  }
+  
+  input ModifierGroupInput {
+    name: String!
+    description: String
+  }
+  
+  input ModifierInput {
+    name: String!
+    price: Float!
+  }
+  
+  input MenuCategoryInput {
+    name: String!
+    description: String
   }
   
   input VenueInput {
@@ -140,8 +139,7 @@ type Venue {
     instagram: String
     facebook: String
     twitter: String
-    menus: [ID!]
-    tradingHours: [TradingHoursInput!]
+    tradingHours: [TradingHoursInput!]!
   }
   
   input TradingHoursInput {
@@ -151,35 +149,6 @@ type Venue {
     closed: Boolean!
   }
   
-  input MenuInput {
-    name: String!
-    description: String
-    menuCategory: [ID]
-  }
-  
-  input MenuCategoryInput {
-    name: String!
-    description: String
-    menuItems: [ID!]
-  }
-  
-  input MenuItemInput {
-    name: String!
-    description: String!
-    price: Float!
-    imgLocation: String
-    modifierGroups: [ID!]
-  }
-  
-  input ModifierGroupInput {
-    name: String!
-    description: String
-    modifiers: [ID!]
-  }
-  input ModifierInput {
-    name: String!
-    price: Float!
-    }
-  
-    `
+`;
+
 module.exports = typeDefs;

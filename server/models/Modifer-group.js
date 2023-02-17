@@ -17,8 +17,12 @@ const modifierGroupSchema = new Schema({
     },
     modifiers: [{
         type: Schema.Types.ObjectId,
-        ref: 'Modifiers'
-    }]
+        ref: 'Modifier'
+    }],
+    menu_item: {
+        type: Schema.Types.ObjectId,
+        ref: 'MenuItem'
+    }
 });
 
 const ModifierGroup = model('ModifierGroup', modifierGroupSchema);

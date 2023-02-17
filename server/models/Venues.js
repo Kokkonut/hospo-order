@@ -61,9 +61,9 @@ const venueSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    menus: [{
+    menucategory: [{
         type: Schema.Types.ObjectId,
-        ref: 'Menus'
+        ref: 'MenuCategory'
     }],
 
     tradingHours: [

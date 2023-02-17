@@ -30,8 +30,12 @@ const menuItemSchema = new Schema({
     modifier_group: {
         type: Schema.Types.ObjectId,
         ref: 'ModifierGroup'
+    },
+    category: {
+        type: Schema.Types.ObjectId,
+        ref: 'MenuCategory'
     }
 });
 
-const MenuItem = model('MenuItem', menuItemSchema);
-module.exports = MenuItem;
+const MenuItems = model('MenuItems', menuItemSchema);
+module.exports = MenuItems;

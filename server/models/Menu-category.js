@@ -1,7 +1,5 @@
 const { Schema, model } = require('mongoose');
 
-//This is a subdocument schema for the menu categories it will be used in menues schema
-// const menuItemSchema = require('./Menu-item');
 const menuCategorySchema = new Schema({
     name: {
         type: String,
@@ -17,13 +15,16 @@ const menuCategorySchema = new Schema({
         type: Date,
         default: Date.now
     },
-    // menuItems: [menuItemSchema],
-     menuItems: [{
+    menuItems: [{
         type: Schema.Types.ObjectId,
-       ref: 'MenuItem'
-    }]
-
-
+        ref: 'MenuItem'
+    }],
+    venue: {
+        type: Schema.Types.ObjectId,
+        ref: 'Venues'
+    }
 });
+
 const MenuCategory = model('MenuCategory', menuCategorySchema);
+
 module.exports = MenuCategory;
