@@ -21,7 +21,8 @@ const menuCategorySchema = new Schema({
     }],
     venue: {
         type: Schema.Types.ObjectId,
-        ref: 'Venues'
+        ref: 'Venues',
+        required: true
     }
 });
 

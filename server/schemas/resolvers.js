@@ -14,26 +14,10 @@ const resolvers = {
 
         //     throw new AuthenticationError('Not logged in');
         // },
-        // //get all venues
-        // venues: async () => {
-        //     return Venues.find();
-        // },
-        // //get all menu categories
-        // menuCategories: async () => {
-        //     return MenuCategory.find();
-        // },
-        // //get all menu items
-        // menuItems: async () => {
-        //     return MenuItems.find();
-        // },
-        // // //get all modifier groups
-        // modifierGroups: async () => {
-        //     return ModifierGroup.find();
-        // },
-        // // //get all modifiers
-        // modifiers: async () => {
-        //     return Modifiers.find();
-        // },
+        //get all menu categories
+        getAllMenuCategories: async () => {
+            return MenuCategory.find();
+        },
 
         //query to return the menu, menu category, and menu item, and modifier group and modifiers
         getAllVenues: async () => {

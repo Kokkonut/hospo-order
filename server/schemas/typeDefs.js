@@ -72,16 +72,16 @@ type MenuItem {
   }
   
   type Query {
-    getMenuCategoryById(id: ID!): MenuCategory
-    getAllMenuCategories: [MenuCategory!]!
-    getMenuItemById(id: ID!): MenuItem
-    getAllMenuItems: [MenuItem!]!
-    getModifierGroupById(id: ID!): ModifierGroup
-    getAllModifierGroups: [ModifierGroup!]!
-    getModifierById(id: ID!): Modifier
-    getAllModifiers: [Modifier!]!
-    getVenueById(id: ID!): Venue
-    getAllVenues: [Venue!]!
+   
+    getAllMenuCategories: [MenuCategory!]
+
+    getAllMenuItems: [MenuItem!]
+
+    getAllModifierGroups: [ModifierGroup!]
+
+    getAllModifiers: [Modifier!]
+
+    getAllVenues: [Venue!]
   }
   
   type Mutation {

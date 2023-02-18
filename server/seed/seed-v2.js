@@ -11,7 +11,7 @@ mongoose.connect('mongodb://localhost/hospo-order', {
   useUnifiedTopology: true,
 });
 
-mongoose.connection.dropDatabase();
+
 // Create a Venue
 const venue = new Venues({
   name: 'The Test Venue',
@@ -75,3 +75,4 @@ Promise.all([
   .then(() => console.log('Data saved to the database'))
   .catch((error) => console.log(error))
   .finally(() => mongoose.disconnect());
+

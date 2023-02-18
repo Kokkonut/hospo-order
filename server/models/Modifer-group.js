@@ -21,7 +21,9 @@ const modifierGroupSchema = new Schema({
     }],
     menu_item: {
         type: Schema.Types.ObjectId,
-        ref: 'MenuItem'
+        ref: 'MenuItem',
+        required: true
+        
     }
 });
 

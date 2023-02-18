@@ -13,7 +13,8 @@ const modifierGroupSchema = new Schema({
     },
     modifier_group: {
         type: Schema.Types.ObjectId,
-        ref: 'ModifierGroup'
+        ref: 'ModifierGroup',
+        required  : true
     },
 }
 );

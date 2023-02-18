@@ -31,11 +31,13 @@ const menuItemSchema = new Schema({
         type: Schema.Types.ObjectId,
         ref: 'ModifierGroup'
     },
-    category: {
+    menuCategory: {
         type: Schema.Types.ObjectId,
-        ref: 'MenuCategory'
+        ref: 'MenuCategory',
+        required: true
     }
 });
+
 
 const MenuItems = model('MenuItems', menuItemSchema);
 module.exports = MenuItems;
