@@ -1,7 +1,7 @@
 import React from 'react'
 import LoginLinks from '../components/Login/LoginLinks';
-import LoginMain from '../components/Login/LoginMain';
-import LoginCreate from '../components/Login/LoginCreate';
+// import LoginMain from '../components/Login/LoginMain';
+// import LoginCreate from '../components/Login/LoginCreate';
 
 const Login = () => {
   return (
@@ -12,8 +12,7 @@ const Login = () => {
         </div>
  
       <LoginLinks />
-        <LoginMain />
-        <LoginCreate /> 
+
 
       </div>
  )
