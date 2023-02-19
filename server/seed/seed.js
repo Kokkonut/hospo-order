@@ -1,77 +1,145 @@
 const mongoose = require('mongoose');
-const User = require('../models/Users');
-const Venues = require('../models/Venues');
-const MenuCategory = require('../models/Menu-category');
-const MenuItem = require('../models/Menu-item');
-const ModifierGroup = require('../models/Modifer-group');
-const Modifiers = require('../models/Modifiers');
+const bcrypt = require('bcrypt');
 
-mongoose.connect('mongodb://localhost/hospo-order', {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
+const Venue = require('../models/Venue');
+const Users = require('../models/Users');
+const Order = require('../models/Orders');
 
-mongoose.connection.dropDatabase();
-// Create a Venue
-const venue = new Venues({
-  name: 'The Test Venue',
-  address: '123 Main Street',
-  city: 'Anytown',
-  state: 'CA',
-  zip: 12345,
-  phone: 123,
-  email: 'test@venue.com',
-  website: 'http://www.testvenue.com',
-  instagram: 'http://instagram.com/testvenue',
-  facebook: 'http://facebook.com/testvenue',
-  twitter: 'http://twitter.com/testvenue',
-});
+const saltRounds = 10;
+const password = 'mypassword';
 
-// Create a MenuCategory
-const menuCategory = new MenuCategory({
-  name: 'Appetizers',
-  description: 'Start your meal off right with our delicious appetizers.',
-  venue: venue._id,
-});
+mongoose
+  .connect('mongodb://localhost/hospo-order', { useNewUrlParser: true, useUnifiedTopology: true })
+  .then(async () => {
+    // Create a venue with menus and some menu items
+    const venue = await Venue.create({
+      name: 'My Venue',
+      address: '123 Main St',
+      city: 'Anytown',
+      state: 'CA',
+      zip: 12345,
+      phone: 1234567890,
+      email: 'myvenue@example.com',
+      // tradingHours: [
+      //   {
+      //     dayOfWeek: 'Monday',
+      //     openTime: '10:00 AM',
+      //     closeTime: '6:00 PM',
+      //   },
+      //   {
+      //     dayOfWeek: 'Tuesday',
+      //     openTime: '10:00 AM',
+      //     closeTime: '6:00 PM',
+      //   },
+      // ],
+      menu: [
+        {
+          name: 'Breakfast Menu',
+          categories: [
+            {
+              name: 'Eggs',
+              items: [
+                {
+                  name: 'Scrambled Eggs',
+                  description: 'Two eggs scrambled',
+                  price: 5.99,
+                },
+                {
+                  name: 'Omelette',
+                  description: 'Three egg omelette with cheese and vegetables',
+                  price: 7.99,
+                },
+              ],
+            },
+            {
+              name: 'Pancakes',
+              items: [
+                {
+                  name: 'Buttermilk Pancakes',
+                  description: 'Three buttermilk pancakes',
+                  price: 6.99,
+                },
+              ],
+            },
+          ],
+        },
+        {
+          name: 'Lunch Menu',
+          categories: [
+            {
+              name: 'Sandwiches',
+              items: [
+                {
+                  name: 'Turkey Sandwich',
+                  description: 'Roasted turkey breast with lettuce and tomato on whole wheat bread',
+                  price: 8.99,
+                },
+                {
+                  name: 'Grilled Cheese',
+                  description: 'Cheddar and American cheese on grilled sourdough bread',
+                  price: 6.99,
+                },
+              ],
+            },
+            {
+              name: 'Salads',
+              items: [
+                {
+                  name: 'Cobb Salad',
+                  description: 'Romaine lettuce, avocado, bacon, chicken, and blue cheese crumbles',
+                  price: 10.99,
+                },
+              ],
+            },
+          ],
+        },
+      ],
+    });
 
-// Create a MenuItem
-const menuItem = new MenuItem({
-  name: 'Cheese Sticks',
-  description: 'Mozzarella sticks served with marinara sauce.',
-  price: 5.99,
-  imgLocation: '/images/cheese-sticks.jpg',
-  menuCategory: menuCategory._id,
-});
+    // Create a user
+    const hashedPassword = await bcrypt.hash(password, saltRounds);
+    const user = await Users.create({
+      firstName: 'John',
+      lastName: 'Doe',
+      email: 'johndoe@example.com',
+      phone: 1234567890,
+      password: hashedPassword,
+      isVenueOwner: false,
+    });
 
-// Create a ModifierGroup
-const modifierGroup = new ModifierGroup({
-  name: 'Add-ons',
-  description: 'Enhance your dish with our add-ons.',
-  menu_item: menuItem._id,
-});
+    // Create an order
+    const order = await Order.create({
+      venue: venue._id,
+      user: user._id,
+      items: [
+        {
+          name: 'Scrambled Eggs',
+          price: 5.99,
+          quantity: 2,
+        },
+        {
+          name: 'Turkey Sandwich',
+          price: 8.99,
+          quantity: 1,
+        },
+      ],
+    });
 
-// Create Modifiers
-const modifier1 = new Modifiers({
-  name: 'Extra Cheese',
-  price: 0.50,
-  modifier_group: modifierGroup._id,
-});
+    // Add the order to the user's orders
+    user.orders.push(order._id);
+    await user.save();
 
-const modifier2 = new Modifiers({
-  name: 'Bacon',
-  price: 1.00,
-  modifier_group: modifierGroup._id,
-});
 
-// Save the data to the database
-Promise.all([
-  venue.save(),
-  menuCategory.save(),
-  menuItem.save(),
-  modifierGroup.save(),
-  modifier1.save(),
-  modifier2.save(),
-])
-  .then(() => console.log('Data saved to the database'))
-  .catch((error) => console.log(error))
-  .finally(() => mongoose.disconnect());
+    // Add the order to the venue's orders
+    venue.orders.push(order._id);
+    await venue.save();
+
+    console.log('Done!');
+    process.exit(0);
+  })
+  .catch((err) => {
+    console.error(err);
+    process.exit(1);
+  }
+);
+

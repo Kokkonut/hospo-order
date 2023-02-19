@@ -2,144 +2,95 @@ const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
 
+  type Auth {
+    token: ID!
+    user: User
+  }
 
-input VenueInput {
-  name: String!
-  address: String!
-  city: String!
-  state: String!
-  zip: Int!
-  phone: String
-  email: String!
-  website: String
-  instagram: String
-  facebook: String
-  twitter: String
+  type User {
+    _id: ID!
+    firstName: String!
+    lastName: String!
+    email: String!
+    phone: String!
+    password: String!
+    fullName: String
+    isVenueOwner: Boolean!
+  }
+
+  type Venue {
+    _id: ID!
+    name: String!
+    address: String!
+    phone: String!
+    email: String!
+    menu: [MenuCategory]!
+    orders: [Order!]!
+  }
+
+  type Menu {
+    _id: ID!
+    title: String!
+    categories: [MenuCategory]!
+  }
+
+  type MenuCategory {
+    _id: ID!
+    title: String!
+    menuItems: [MenuItem]!
+  }
   
-}
-
-input MenuCategoryInput {
-  name: String!
-  description: String!
-  venue: ID!
-}
-
-input MenuItemInput {
-  name: String!
-  description: String!
-  price: Float!
-  imgLocation: String!
-  menuCategory: ID!
-}
-
-input ModifierGroupInput {
-  name: String!
-  description: String!
-  menuItem: ID!
-}
-
-input ModifierInput {
-  name: String!
-  price: Float!
-  modifierGroup: ID!
-}
-
-type Auth {
-  token: ID!
-  user: User
+  type MenuItem {
+    _id: ID!
+    name: String!
+    description: String!
+    price: Float!
   }
 
-type User {
-  _id: ID!
-  firstName: String!
-  lastName: String!
-  email: String!
-  phone: Int!
-  password: String!
-  fullName: String
-  isVenueOwner: Boolean!
+  type Order {
+    _id: ID!
+    user: User!
+    venue: Venue!
+    items: [OrderItem!]!
+    status: OrderStatus!
+    createdAt: String!
+  }
+  
+  type OrderItem {
+    id: ID!
+    menuItem: MenuItem!
+    quantity: Int!
+    notes: String
+  }
+  
+  type OrderStatus {
+    id: ID!
+    name: String!
   }
 
-type Venue {
-  id: ID!
-  name: String!
-  address: String!
-  city: String!
-  state: String!
-  zip: Int!
-  phone: String
-  email: String!
-  website: String
-  instagram: String
-  facebook: String
-  twitter: String
-  menuCategories: [MenuCategory]
-}
+  type Query {
+    venues: [Venue!]!
+    orders: [Order!]!
+    order(id: ID!): Order
+  }
 
-type TradingHours {
-  dayOfWeek: String!
-  openTime: String!
-  closeTime: String!
-  closed: Boolean!
-}
+  type Mutation {
+    addUser(firstName: String!, lastName: String!, email: String!, phone: String!, password: String!): Auth
+    login(email: String!, password: String!): Auth
+    addOrder(user: ID!, venue: ID!, items: [OrderItemInput!]!): Order
+    updateOrderStatus(id: ID!, status: ID!): Order
+    addVenue(name: String!, address: String!, phone: String!, email: String!): Venue
+    addMenu(venue: ID!, title: String!): Menu
+    addMenuCategory(menu: ID!, title: String!): MenuCategory
+    addMenuItem(menuCategory: ID!, name: String!, description: String!, price: Float!): MenuItem
 
-type MenuCategory {
-  id: ID!
-  name: String!
-  description: String!
-  venue: [Venue]
-  menuItems: [MenuItem]!
-}
 
-type MenuItem {
-  id: ID!
-  name: String!
-  description: String!
-  price: Float!
-  imgLocation: String!
-  menuCategory: MenuCategory!
-  modifierGroups: [ModifierGroup]!
-}
+  } 
 
-type ModifierGroup {
-  id: ID!
-  name: String!
-  description: String!
-  menuItem: MenuItem!
-  modifiers: [Modifier]!
-}
-
-type Modifier {
-  id: ID!
-  name: String!
-  price: Float!
-  modifierGroup: ModifierGroup!
-}
-
-type AllDetails {
-  venues: [Venue]
-  menuCategories: [MenuCategory]
-  menuItems: [MenuItem]
-  modifierGroups: [ModifierGroup]
-  modifiers: [Modifier]
-}
-
-type Query {
-  venues: [Venue]!
-
-  allDetails: AllDetails
-}
-
-type Mutation {
-  addUser(firstName: String!, lastName: String!, email: String!, phone: Int!, password: String!): Auth
-  login(email: String!, password: String!): Auth
-  createVenue(input: VenueInput!): Venue
-  createMenuCategory(input: MenuCategoryInput!): MenuCategory
-  createMenuItem(input: MenuItemInput!): MenuItem
-  createModifierGroup(input: ModifierGroupInput!): ModifierGroup
-  createModifier(input: ModifierInput!): Modifier
-} 
-
+  input OrderItemInput {
+    menuItem: ID!
+    quantity: Int!
+  }
 
 `;
 

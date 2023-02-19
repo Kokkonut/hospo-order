@@ -1,4 +1,5 @@
 const { Schema, model } = require('mongoose');
+const menuSchema = require('./menuSchema');
 
 // const menuSchema = require('./Menus');
 const venueSchema = new Schema({
@@ -9,21 +10,6 @@ const venueSchema = new Schema({
     },
     address: {
         type: String,
-        required: true,
-        trim: true
-    },
-    city: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    state: {
-        type: String,
-        required: true,
-        trim: true
-    },
-    zip: {
-        type: Number,
         required: true,
         trim: true
     },
@@ -40,6 +26,11 @@ const venueSchema = new Schema({
     menu: {
         type: [menuSchema]
     },
+
+    orders: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Order'
+    }],
 
     tradingHours: [
         {

@@ -1,5 +1,6 @@
-const Venues = require('./Venue');
+const Venue = require('./Venue');
 const Users = require('./Users');
+const Orders = require('./Orders');
 
 // const Orders = require('./Orders');
 // const OrderItems = require('./Order-items');
@@ -7,9 +8,7 @@ const Users = require('./Users');
 
 
 module.exports = { 
-    Venues, 
-    Users, 
-
-    // Orders, 
-    // OrderItems 
+    Venue, 
+    Users,
+    Orders,
 };

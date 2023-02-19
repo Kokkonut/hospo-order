@@ -38,6 +38,12 @@ const userSchema = new Schema({
         type: Boolean,
         default: false
     },
+
+    orders: [{
+        type: Schema.Types.ObjectId,
+        ref: 'Order'
+    }],
+
     //still need to add past orders.
 },
 {

@@ -1,3 +1,4 @@
+const { Schema, model } = require('mongoose');
 const orderSchema = new Schema({
     items: [{
       menuItem: {
@@ -25,7 +26,15 @@ const orderSchema = new Schema({
       enum: ['New', 'In Progress', 'Ready', 'Completed', 'Canceled'],
       default: 'New'
     },
+    createdAt: {
+        type: Date,
+        default: Date.now
+    },
   }, {
     timestamps: true
   });
+
+const Order = model('Order', orderSchema);
+
+module.exports = Order;
   
