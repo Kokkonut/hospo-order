@@ -5,27 +5,6 @@ const { Users, Venues, MenuCategory, ModifierGroup, Modifiers, MenuItems } = req
 const resolvers = {
   Query: {
     venues: async () => {
-
-
-      // const venues = await Venues.find()
-      // .populate({
-      //   path: 'menucategory'
-      // })
-
-      // .populate({
-      //   path: 'menuItems'
-      // })
-
-      // .populate({
-      //   path: 'modifier_group'
-      // })
-
-      // .populate({
-      //   path: 'modifiers'
-      // })
-
-
-
       try {
         const venues = await Venues.find()
           .populate({
@@ -44,13 +23,20 @@ const resolvers = {
               }
             }
           }).exec();
-          console.log(venues);
-        return venues;
+        // Use execPopulate to ensure the populated fields are included in the query results
+        const populatedVenues = await Venues.populate(venues, {
+          path: 'menucategory.menuItems.modifier_group.modifiers',
+          model: 'Modifiers'
+        });
+        console.log(populatedVenues);
+        return populatedVenues;
       } catch (err) {
         console.error(err);
         throw new Error('Failed to fetch venues.');
       }
     },
+    
+    
 
     // allDetails: async () => {
     //   try {

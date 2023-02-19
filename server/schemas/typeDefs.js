@@ -44,8 +44,21 @@ input ModifierInput {
   modifierGroup: ID!
 }
 
+type Auth {
+  token: ID!
+  user: User
+  }
 
-
+type User {
+  _id: ID!
+  firstName: String!
+  lastName: String!
+  email: String!
+  phone: Int!
+  password: String!
+  fullName: String
+  isVenueOwner: Boolean!
+  }
 
 type Venue {
   id: ID!
@@ -63,11 +76,18 @@ type Venue {
   menuCategories: [MenuCategory]
 }
 
+type TradingHours {
+  dayOfWeek: String!
+  openTime: String!
+  closeTime: String!
+  closed: Boolean!
+}
+
 type MenuCategory {
   id: ID!
   name: String!
   description: String!
-  venue: Venue!
+  venue: [Venue]
   menuItems: [MenuItem]!
 }
 
@@ -111,6 +131,8 @@ type Query {
 }
 
 type Mutation {
+  addUser(firstName: String!, lastName: String!, email: String!, phone: Int!, password: String!): Auth
+  login(email: String!, password: String!): Auth
   createVenue(input: VenueInput!): Venue
   createMenuCategory(input: MenuCategoryInput!): MenuCategory
   createMenuItem(input: MenuItemInput!): MenuItem

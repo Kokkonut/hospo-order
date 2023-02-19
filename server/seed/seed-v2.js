@@ -1,30 +1,44 @@
 const mongoose = require('mongoose');
-const User = require('../models/Users');
-const Venues = require('../models/Venues');
-const MenuCategory = require('../models/Menu-category');
-const MenuItem = require('../models/Menu-item');
-const ModifierGroup = require('../models/Modifer-group');
-const Modifiers = require('../models/Modifiers');
+const bcrypt = require('bcrypt');
+
+const User = require('../models/User');
+const Venue = require('../models/Venue');
+const MenuCategory = require('../models/MenuCategory');
+const MenuItem = require('../models/MenuItem');
+const ModifierGroup = require('../models/ModifierGroup');
+const Modifier = require('../models/Modifier');
 
 mongoose.connect('mongodb://localhost/hospo-order', {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 });
 
+mongoose.connection.dropDatabase();
+
+// Create a User
+const user = new User({
+  firstName: 'John',
+  lastName: 'Doe',
+  email: 'john.doe@example.com',
+  phone: '555-555-5555',
+  password: 'password',
+  isVenueOwner: false,
+});
 
 // Create a Venue
-const venue = new Venues({
+const venue = new Venue({
   name: 'The Test Venue',
   address: '123 Main Street',
   city: 'Anytown',
   state: 'CA',
-  zip: 12345,
-  phone: 123,
+  zip: '12345',
+  phone: '555-555-5555',
   email: 'test@venue.com',
   website: 'http://www.testvenue.com',
   instagram: 'http://instagram.com/testvenue',
   facebook: 'http://facebook.com/testvenue',
   twitter: 'http://twitter.com/testvenue',
+  owner: user._id,
 });
 
 // Create a MenuCategory
@@ -47,32 +61,76 @@ const menuItem = new MenuItem({
 const modifierGroup = new ModifierGroup({
   name: 'Add-ons',
   description: 'Enhance your dish with our add-ons.',
-  menu_item: menuItem._id,
+  menuItem: menuItem._id,
 });
 
 // Create Modifiers
-const modifier1 = new Modifiers({
+const modifier1 = new Modifier({
   name: 'Extra Cheese',
   price: 0.50,
-  modifier_group: modifierGroup._id,
+  modifierGroup: modifierGroup._id,
 });
 
-const modifier2 = new Modifiers({
+const modifier2 = new Modifier({
   name: 'Bacon',
   price: 1.00,
-  modifier_group: modifierGroup._id,
+  modifierGroup: modifierGroup._id,
 });
 
 // Save the data to the database
-Promise.all([
-  venue.save(),
-  menuCategory.save(),
-  menuItem.save(),
-  modifierGroup.save(),
-  modifier1.save(),
-  modifier2.save(),
-])
-  .then(() => console.log('Data saved to the database'))
-  .catch((error) => console.log(error))
-  .finally(() => mongoose.disconnect());
+const saltRounds = 10;
+bcrypt.hash(user.password, saltRounds, (err, hash) => {
+  if (err) {
+    console.log(err);
+    return;
+  }
 
+  user.password = hash;
+  user.save((err) => {
+    if (err) {
+      console.log(err);
+      return;
+    }
+
+    venue.save((err) => {
+      if (err) {
+        console.log(err);
+        return;
+      }
+
+      menuCategory.save((err) => {
+        if (err) {
+          console.log(err);
+          return;
+        }
+
+        menuItem.save((err) => {
+          if (err) {
+            console.log(err);
+            return;
+          }
+
+          modifierGroup.save((err) => {
+            if (err) {
+              console.log(err);
+              return;
+            }
+
+            modifier1.save((err) => {
+              if (err) {
+                console.log(err);
+                return;
+              }
+
+              modifier2.save((err) => {
+                if (err) {
+                  console.log(err);
+                  return;
+                }
+
+                console.log('Data saved to the database');
+                mongoose.disconnect();
+              });
+            });
+          });
+        });
