@@ -1,154 +1,124 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
-scalar Date
 
-type Auth {
-    token: ID!
-    user: User
+
+input VenueInput {
+  name: String!
+  address: String!
+  city: String!
+  state: String!
+  zip: Int!
+  phone: String
+  email: String!
+  website: String
+  instagram: String
+  facebook: String
+  twitter: String
+  
 }
 
-type User {
-    _id: ID!
-    firstName: String!
-    lastName: String!
-    email: String!
-    phone: Int!
-    password: String!
-    fullName: String
-    isVenueOwner: Boolean!
+input MenuCategoryInput {
+  name: String!
+  description: String!
+  venue: ID!
 }
+
+input MenuItemInput {
+  name: String!
+  description: String!
+  price: Float!
+  imgLocation: String!
+  menuCategory: ID!
+}
+
+input ModifierGroupInput {
+  name: String!
+  description: String!
+  menuItem: ID!
+}
+
+input ModifierInput {
+  name: String!
+  price: Float!
+  modifierGroup: ID!
+}
+
+
+
+
+type Venue {
+  id: ID!
+  name: String!
+  address: String!
+  city: String!
+  state: String!
+  zip: Int!
+  phone: String
+  email: String!
+  website: String
+  instagram: String
+  facebook: String
+  twitter: String
+  menuCategories: [MenuCategory]
+}
+
+type MenuCategory {
+  id: ID!
+  name: String!
+  description: String!
+  venue: Venue!
+  menuItems: [MenuItem]!
+}
+
 type MenuItem {
-    _id: ID!
-    name: String!
-    description: String!
-    price: Float!
-    imgLocation: String
-    modifier_group: ModifierGroup
-  }
-  
-  type ModifierGroup {
-    _id: ID!
-    name: String!
-    description: String
-    modifiers: [Modifier!]!
-  }
-  
-  type Modifier {
-    _id: ID!
-    name: String!
-    price: Float!
-  }
-  
-  type MenuCategory {
-    _id: ID!
-    name: String!
-    description: String
-    menuItems: [MenuItem!]!
-  }
-  
-  type Venue {
-    _id: ID!
-    name: String!
-    address: String!
-    city: String!
-    state: String!
-    zip: Int!
-    phone: Int
-    email: String!
-    website: String
-    instagram: String
-    facebook: String
-    twitter: String
-    menu_category: [MenuCategory!]!
-    tradingHours: [TradingHours!]!
-  }
-  
-  type TradingHours {
-    dayOfWeek: String!
-    openTime: String!
-    closeTime: String!
-    closed: Boolean!
-  }
-  
-  type Query {
-   
-    getAllMenuCategories: [MenuCategory!]
+  id: ID!
+  name: String!
+  description: String!
+  price: Float!
+  imgLocation: String!
+  menuCategory: MenuCategory!
+  modifierGroups: [ModifierGroup]!
+}
 
-    getAllMenuItems: [MenuItem!]
+type ModifierGroup {
+  id: ID!
+  name: String!
+  description: String!
+  menuItem: MenuItem!
+  modifiers: [Modifier]!
+}
 
-    getAllModifierGroups: [ModifierGroup!]
+type Modifier {
+  id: ID!
+  name: String!
+  price: Float!
+  modifierGroup: ModifierGroup!
+}
 
-    getAllModifiers: [Modifier!]
+type AllDetails {
+  venues: [Venue]
+  menuCategories: [MenuCategory]
+  menuItems: [MenuItem]
+  modifierGroups: [ModifierGroup]
+  modifiers: [Modifier]
+}
 
-    getAllVenues: [Venue!]
-  }
-  
-  type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, phone: Int!, password: String!): Auth
-    login(email: String!, password: String!): Auth
-    createMenuCategory(input: MenuCategoryInput!): MenuCategory!
-    updateMenuCategory(id: ID!, input: MenuCategoryInput!): MenuCategory!
-    deleteMenuCategory(id: ID!): MenuCategory!
-    createMenuItem(input: MenuItemInput!): MenuItem!
-    updateMenuItem(id: ID!, input: MenuItemInput!): MenuItem!
-    deleteMenuItem(id: ID!): MenuItem!
-    createModifierGroup(input: ModifierGroupInput!): ModifierGroup!
-    updateModifierGroup(id: ID!, input: ModifierGroupInput!): ModifierGroup!
-    deleteModifierGroup(id: ID!): ModifierGroup!
-    createModifier(input: ModifierInput!): Modifier!
-    updateModifier(id: ID!, input: ModifierInput!): Modifier!
-    deleteModifier(id: ID!): Modifier!
-    createVenue(input: VenueInput!): Venue!
-    updateVenue(id: ID!, input: VenueInput!): Venue!
-    deleteVenue(id: ID!): Venue!
-  }
-  
-  input MenuItemInput {
-    name: String!
-    description: String!
-    price: Float!
-    imgLocation: String
-    modifier_group: ID
-  }
-  
-  input ModifierGroupInput {
-    name: String!
-    description: String
-  }
-  
-  input ModifierInput {
-    name: String!
-    price: Float!
-  }
-  
-  input MenuCategoryInput {
-    name: String!
-    description: String
-  }
-  
-  input VenueInput {
-    name: String!
-    address: String!
-    city: String!
-    state: String!
-    zip: Int!
-    phone: Int
-    email: String!
-    website: String
-    instagram: String
-    facebook: String
-    twitter: String
-    tradingHours: [TradingHoursInput!]!
-  }
-  
-  input TradingHoursInput {
-    dayOfWeek: String!
-    openTime: String!
-    closeTime: String!
-    closed: Boolean!
-  }
-  
+type Query {
+  venues: [Venue]!
+
+  allDetails: AllDetails
+}
+
+type Mutation {
+  createVenue(input: VenueInput!): Venue
+  createMenuCategory(input: MenuCategoryInput!): MenuCategory
+  createMenuItem(input: MenuItemInput!): MenuItem
+  createModifierGroup(input: ModifierGroupInput!): ModifierGroup
+  createModifier(input: ModifierInput!): Modifier
+} 
+
+
 `;
 
 module.exports = typeDefs;

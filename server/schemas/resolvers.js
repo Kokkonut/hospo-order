@@ -1,75 +1,100 @@
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
 const { Users, Venues, MenuCategory, ModifierGroup, Modifiers, MenuItems } = require('../models');
+
 const resolvers = {
-    Query: {
-        //get all users
-        // me: async (parent, args, context) => {
-        //     if (context.user) {
-        //         const userData = await Users.findOne({ _id: context.user._id })
-        //             .select('-__v -password')
+  Query: {
+    venues: async () => {
 
-        //         return userData;
-        //     }
 
-        //     throw new AuthenticationError('Not logged in');
-        // },
-        //get all menu categories
-        getAllMenuCategories: async () => {
-            return MenuCategory.find();
-        },
+      // const venues = await Venues.find()
+      // .populate({
+      //   path: 'menucategory'
+      // })
 
-        //query to return the menu, menu category, and menu item, and modifier group and modifiers
-        getAllVenues: async () => {
-          try {
-            const venues = await Venues.find()
-              .populate({
-                path: 'menuCategories',
+      // .populate({
+      //   path: 'menuItems'
+      // })
+
+      // .populate({
+      //   path: 'modifier_group'
+      // })
+
+      // .populate({
+      //   path: 'modifiers'
+      // })
+
+
+
+      try {
+        const venues = await Venues.find()
+          .populate({
+            path: 'menucategory',
+            model: 'MenuCategory',
+            populate: {
+              path: 'menuItems',
+              model: 'MenuItems',
+              populate: {
+                path: 'modifier_group',
+                model: 'ModifierGroup',
                 populate: {
-                  path: 'menuItems',
-                  populate: {
-                    path: 'modifierGroups',
-                    populate: {
-                      path: 'modifiers'
-                    }
-                  }
+                  path: 'modifiers',
+                  model: 'Modifiers'
                 }
-              });
-            console.log(venues);
-            return venues;
-          } catch (err) {
-            throw new Error(`Failed to fetch venues: ${err}`);
-          }
-        }
-        
-
+              }
+            }
+          }).exec();
+          console.log(venues);
+        return venues;
+      } catch (err) {
+        console.error(err);
+        throw new Error('Failed to fetch venues.');
+      }
     },
 
-    Mutation: {
-        //create a new user
-        addUser: async (parent, args) => {
-            const user = await Users.create(args);
-            const token = signToken(user);
-            return { token, user };
-        },
-        //login a user
-        login: async (parent, { email, password }) => {
-            const user = await Users.findOne({email, password});
-
-            if (!user) {
-                throw new AuthenticationError('Incorrect credentials');
-            }
-
-            const correctPw = await user.isCorrectPassword(password);
-
-            if (!correctPw) {
-                throw new AuthenticationError('Incorrect credentials');
-            }
-
-            const token = signToken(user);
-            return { token, user };
-        },
+    // allDetails: async () => {
+    //   try {
+    //     const venues = await Venues.find()
+    //       .populate({
+    //         path: 'menucategory',
+    //         populate: {
+    //           path: 'menuItems',
+    //           populate: {
+    //             path: 'modifier_group',
+    //             populate: {
+    //               path: 'modifiers'
+    //             }
+    //           }
+    //         }
+    //       }).exec();
+    //       console.log(venues);
+    //     return venues;
+    //   } catch (err) {
+    //     console.error(err);
+    //     throw new Error('Failed to fetch venues.');
+    //   }
+    // },
+    
+  },
+  Mutation: {
+    createMenuCategory: async (parent, { input }) => {
+      try {
+        const menuCategory = await MenuCategory.create(input);
+        return menuCategory;
+      } catch (err) {
+        console.error(err);
+        throw new Error('Failed to create menu category.');
+      }
     }
+  }
+
+
+
+
+
+
+  
 };
+
 
 module.exports = resolvers;
