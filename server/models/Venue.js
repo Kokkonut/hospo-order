@@ -23,10 +23,11 @@ const venueSchema = new Schema({
         required: true,
         trim: true
     },
+    //this is the old bit of code
     menu: {
         type: [menuSchema]
     },
-
+// end old code
     orders: [{
         type: Schema.Types.ObjectId,
         ref: 'Order'

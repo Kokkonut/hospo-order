@@ -1,0 +1,69 @@
+{
+    "Coffees": [
+      {
+        "name": "Latte",
+        "description": "Espresso with steamed milk and a layer of foam.",
+        "price": 4,
+        "size": {
+          "Small": 0,
+          "Medium": 0.5,
+          "Large": 1.0
+        }
+      },
+      {
+        "name": "Cappuccino",
+        "description": "Espresso with steamed milk and less foam than a latte.",
+        "price": 4,
+        "size": {
+          "Small": 0,
+          "Medium": 0.5,
+          "Large": 1.0
+        }
+      }
+    ],
+    "Toast": [
+      {
+        "name": "Buttered Toast",
+        "description": "Two slices of toasted bread with butter.",
+        "price" : 4,
+        "how toasted": {
+          "Light Toasted": 0,
+          "Well Toasted": 0
+        },
+        "toppings": [
+          {
+            "name": "Jelly",
+            "price": 0.5
+          },
+          {
+            "name": "Peanut Butter",
+            "price": 0.5
+          }
+        ]
+      },
+      {
+        "name": "Avocado Toast",
+        "description": "Two slices of toasted bread with avocado and toppings.",
+        "price": 5,
+        "how toasted": {
+            "Light Toasted": 0,
+            "Well Toasted": 0
+          },
+        "toppings": [
+          {
+            "name": "Feta Cheese",
+            "price": 0.5
+          },
+          {
+            "name": "Tomatoes",
+            "price": 0.5
+          },
+          {
+            "name": "Everything Bagel Seasoning",
+            "price": 0.5
+          }
+        ]
+      }
+    ]
+  }
+  
