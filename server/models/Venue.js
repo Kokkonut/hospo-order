@@ -37,34 +37,9 @@ const venueSchema = new Schema({
         required: true,
         trim: true
     },
-    website: {
-        type: String,
-        required: false,
-        trim: true
+    menu: {
+        type: [menuSchema]
     },
-    instagram: {
-        type: String,
-        required: false,
-        trim: true
-    },
-    facebook: {
-        type: String,
-        required: false,
-        trim: true
-    },
-    twitter: {
-        type: String,
-        required: false,
-        trim: true
-    },
-    venueCreated: {
-        type: Date,
-        default: Date.now
-    },
-    menucategory: [{
-        type: Schema.Types.ObjectId,
-        ref: 'MenuCategory'
-    }],
 
     tradingHours: [
         {
