@@ -1,63 +1,62 @@
 const { gql } = require('apollo-server-express');
 
 const typeDefs = gql`
+  type Category {
+    _id: ID
+    name: String
+  }
 
-  type Auth {
-    token: ID!
-    user: User
+  type Product {
+    _id: ID
+    name: String
+    description: String
+    image: String
+    quantity: Int
+    price: Float
+    category: Category
+  }
+
+  type Order {
+    _id: ID
+    purchaseDate: String
+    products: [Product]
   }
 
   type User {
-    _id: ID!
-    firstName: String!
-    lastName: String!
-    email: String!
-    phone: String!
-    password: String!
-    fullName: String
-    isVenueOwner: Boolean!
+    _id: ID
+    firstName: String
+    lastName: String
+    email: String
+    phone: String
+    isVenueOwner: Boolean
+    orders: [Order]
   }
 
-  type Venue {
-    _id: ID!
-    name: String!
-    address: String!
-    phone: String!
-    email: String!
-    menu: [category]
+  type Checkout {
+    session: ID
   }
 
-  type category {
-    name: String!
-    items: [item]
+  type Auth {
+    token: ID
+    user: User
   }
 
-  type item {
-    name: String!
-    price: Float!
-    description: String
-    modifiers: [modifier]
-  }
-
-  type modifier {
-    name: String!
-    price: Float!
+  type Query {
+    categories: [Category]
+    products(category: ID, name: String): [Product]
+    product(_id: ID!): Product
+    user: User
+    order(_id: ID!): Order
+    checkout(products: [ID]!): Checkout
   }
 
   type Mutation {
-    addUser(firstName: String!, lastName: String!, email: String!, phone: String!, password: String!): Auth
+    addUser(firstName: String!, lastName: String!, email: String!, password: String!): Auth
+    addOrder(products: [ID]!): Order
+    updateUser(firstName: String, lastName: String, email: String, password: String): User
+    updateProduct(_id: ID!, quantity: Int!): Product
     login(email: String!, password: String!): Auth
-    addVenue(name: String!, address: String!, phone: String!, email: String!): Venue
-  } 
-
-  type Query {
-    hello: String
-
-    getVenues: [Venue]
-
   }
-
-
 `;
 
 module.exports = typeDefs;
