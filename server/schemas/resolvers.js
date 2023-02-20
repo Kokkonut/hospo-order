@@ -9,9 +9,13 @@ const resolvers = {
   Query: {
     // query to get all orders that have been placed but not yet completed
     getOrders: async () => {
-      return await Orders.find({ completed: false });
+      try {
+        const orders = await Orders.find().populate("products");
+        return orders;
+      } catch (error) {
+        console.log(error);
+      }
     },
-
     categories: async () => {
       return await Category.find();
     },

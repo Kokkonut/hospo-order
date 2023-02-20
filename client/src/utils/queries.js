@@ -1,16 +1,10 @@
 import { gql } from '@apollo/client';
 
 export const GET_ORDERS = gql`
-query getOrders {
-  orders {
+query GetOrders {
+  getOrders {
     _id
-    purchaseDate
-    products {
-      _id
-      name
-      price
-      quantity
-    }
+    status
   }
 }
 

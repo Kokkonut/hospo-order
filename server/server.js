@@ -8,7 +8,7 @@ const db = require('./config/connection');
 const { authMiddleware } = require('./utils/auth');
 const upload = require('./utils/upload');
 const app = express();
-const PORT = process.env.PORT || 3003;
+const PORT = process.env.PORT || 3005;
 
 
 const server = new ApolloServer({
