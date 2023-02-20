@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
 
-// import MenuCategory from "../components/MenuCategory/MenuCategory";
+import MenuCategory from "../components/MenuCategory/MenuCategory";
 
 import { IdcardOutlined, InfoCircleFilled, ShoppingCartOutlined } from '@ant-design/icons';
 
@@ -42,7 +42,7 @@ const Home = () => {
       </div>
       )}
 
-        {/* <MenuCategory /> */}
+        <MenuCategory />
 
     </div>
 
