@@ -1,11 +1,20 @@
 const mongoose = require('mongoose');
 const { AuthenticationError } = require('apollo-server-express');
+const { PubSub } = require('graphql-subscriptions')
+const pubsub = new PubSub();
 const { signToken } = require('../utils/auth');
 const { Users, Orders, Product, Category } = require('../models');
 const stripe = require('stripe')('sk_test_51MdOkPHZ2XFn2ss4q9hBkA6Ny84iAdaB6Tt039NhVLa827Z0qY9kHOwTIJv9Mu7HcULwAlJoQRnHk2vwH258kc4500Y8MIlvoQ');
 
 
 const resolvers = {
+
+  Subscription: {
+    newOrder: {
+      subscribe: () => pubsub.asyncIterator(['NEW_ORDER'])
+  }
+},
+
   Query: {
     categories: async () => {
       return await Category.find();
