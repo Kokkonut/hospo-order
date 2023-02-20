@@ -18,6 +18,12 @@ const orderSchema = new Schema({
     enum: ['Pending', 'Accepted', 'Rejected', 'Completed'],
     default: 'Pending'
   },
+
+  orderBy: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
+  
 });
 
 const Order = mongoose.model('Order', orderSchema);

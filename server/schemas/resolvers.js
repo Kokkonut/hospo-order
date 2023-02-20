@@ -8,14 +8,12 @@ const stripe = require('stripe')('sk_test_51MdOkPHZ2XFn2ss4q9hBkA6Ny84iAdaB6Tt03
 
 
 const resolvers = {
-
-  Subscription: {
-    newOrder: {
-      subscribe: () => pubsub.asyncIterator(['NEW_ORDER'])
-  }
-},
-
   Query: {
+    // query to get all orders that have been placed but not yet completed
+    getOrders: async () => {
+      return await Orders.find({ completed: false });
+    },
+
     categories: async () => {
       return await Category.find();
     },
