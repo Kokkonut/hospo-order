@@ -26,7 +26,7 @@ const userSchema = new Schema({
     phone: {
         type: String,
         required: false,
-        unique: true,
+        unique: false,
         match: [/[0-9]{3}-[0-9]{3}-[0-9]{4}/, 'Must use a valid phone number']
     },
     password: {
