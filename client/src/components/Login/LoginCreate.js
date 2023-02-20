@@ -1,15 +1,50 @@
+
+import React, { useState } from 'react';
+import { useMutation } from '@apollo/client';
+import Auth from '../../utils/auth';
+import { ADD_USER } from '../../utils/mutations';
 import { Link } from 'react-router-dom';
 
+function LoginCreate(props) {
 
-function LoginCreate() {
+  const [formState, setFormState] = useState({ email: '', password: '' });
+  const [addUser, {error}]  = useMutation(ADD_USER);
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+    try {
+      console.log(formState);
+    const mutationResponse = await addUser({
+      variables: {
+        email: formState.email,
+        password: formState.password,
+        firstName: formState.firstName,
+        lastName: formState.lastName,
+        phone: formState.phone,
+      },
+    });
+    const token = mutationResponse.data.addUser.token;
+    Auth.login(token);
+  } catch (error) {
+    console.log(error);
+  }
+    
+  };
+
+  const handleChange = (event) => {
+    const { name, value } = event.target;
+    setFormState({
+      ...formState,
+      [name]: value,
+    });
+  };
 
   return (
-    <div className="container my-1">
+    <div className="container">
     
-
       <h2>Signup</h2>
       <form
-    //   onSubmit={handleFormSubmit}
+      onSubmit={handleFormSubmit}
       >
         <div>
           <label htmlFor="firstName">First Name:</label>
@@ -18,7 +53,7 @@ function LoginCreate() {
             name="firstName"
             type="firstName"
             id="firstName"
-            // onChange={handleChange}
+            onChange={handleChange}
           />
         </div>
         <div>
@@ -28,7 +63,7 @@ function LoginCreate() {
             name="lastName"
             type="lastName"
             id="lastName"
-            // onChange={handleChange}
+            onChange={handleChange}
           />
         </div>
         <div>
@@ -38,7 +73,7 @@ function LoginCreate() {
             name="email"
             type="email"
             id="email"
-            // onChange={handleChange}
+            onChange={handleChange}
           />
         </div>
         <div>
@@ -48,7 +83,17 @@ function LoginCreate() {
             name="password"
             type="password"
             id="pwd"
-            // onChange={handleChange}
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="pwd">Phone:</label>
+          <input
+            placeholder="******"
+            name="phone"
+            type="text"
+            id="phone"
+            onChange={handleChange}
           />
         </div>
         <div>
