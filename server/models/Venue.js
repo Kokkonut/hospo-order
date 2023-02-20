@@ -1,7 +1,7 @@
 const { Schema, model } = require('mongoose');
-const menuSchema = require('./menuSchema');
+const path = require('path');
+const fs = require('fs');
 
-// const menuSchema = require('./Menus');
 const venueSchema = new Schema({
     name: {
         type: String,
@@ -14,7 +14,7 @@ const venueSchema = new Schema({
         trim: true
     },
     phone: {
-        type: Number,
+        type: String,
         required: false,
         trim: true
     },
@@ -23,16 +23,17 @@ const venueSchema = new Schema({
         required: true,
         trim: true
     },
-    //this is the old bit of code
     menu: {
-        type: [menuSchema]
+        type: Object,
+        default: () => {
+            const data = fs.readFileSync(path.resolve(__dirname, '../data/menu.json'), 'utf8');
+            return JSON.parse(data);
+        }
     },
-// end old code
     orders: [{
         type: Schema.Types.ObjectId,
         ref: 'Order'
     }],
-
     tradingHours: [
         {
           dayOfWeek: String,
@@ -43,10 +44,8 @@ const venueSchema = new Schema({
             default: false
           }
         }
-      ]
-    });
-
-//still need to add past orders.
+    ]
+});
 
 const Venues = model('Venues', venueSchema);
 
