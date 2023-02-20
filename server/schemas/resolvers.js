@@ -107,9 +107,11 @@ const resolvers = {
 
     addOrder: async (parent, { products }, context) => {
       const order = new Orders({ products });
-      console.log(order)
-      return order
+      await order.save();
+      console.log(order);
+      return order;
     },
+    
     
 
     
