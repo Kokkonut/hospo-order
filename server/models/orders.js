@@ -12,7 +12,12 @@ const orderSchema = new Schema({
       type: Schema.Types.ObjectId,
       ref: 'Product'
     }
-  ]
+  ],
+  status: {
+    type: String,
+    enum: ['Pending', 'Accepted', 'Rejected', 'Completed'],
+    default: 'Pending'
+  },
 });
 
 const Order = mongoose.model('Order', orderSchema);
