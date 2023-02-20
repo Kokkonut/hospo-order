@@ -35,7 +35,7 @@ function LoginMain(props) {
     <div className="container">
 
 
-      <h2>Login</h2>
+      <h2 className='header' >Login</h2>
       <form onSubmit={handleFormSubmit}>
         <div>
           <label htmlFor="email">Email address:</label>
@@ -66,7 +66,7 @@ function LoginMain(props) {
           <button type="submit">Submit</button>
         </div>
       </form>
-      <Link to="/">← Go back to Signup</Link>
+      <Link className="back" to="/">← Go back to Signup</Link>
     </div>
   );
 }

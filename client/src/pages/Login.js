@@ -2,22 +2,22 @@ import React from 'react'
 import LoginLinks from '../components/Login/LoginLinks';
 // import LoginMain from '../components/Login/LoginMain';
 // import LoginCreate from '../components/Login/LoginCreate';
+import '../assets/App.css';
+import wallpaper from '../assets/wallpaper.jpg'
+
+// import { Button } from 'antd';
 
 const Login = () => {
   return (
     <div className="container">
 
-        <div>
-            <h1>INSERT LOGO</h1>
-        </div>
- 
-      <LoginLinks />
+        <div >
+             <LoginLinks />
+            <img className='background' src={wallpaper} alt="Wallpaper"  />
+            {/* <h1 className='header'>INSERT LOGO</h1> */}
 
-      {/* Need logic behind these two components to show them once clicked on a button/something */}
-      {/* <LoginMain /> */}
-
-      {/* <LoginCreate />  */}
-
+  
+      </div>
       </div>
  )
  };

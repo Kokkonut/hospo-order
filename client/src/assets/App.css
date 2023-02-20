@@ -1,0 +1,37 @@
+.App {
+  text-align: center;
+}
+
+
+.back {
+  background-color: #758283;
+  color: white;
+  position: relative;
+
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+
+  bottom: 0;
+}
+
+.header {
+  background-color: #758283;
+  color: white;
+  position: relative;
+
+  display: flex;
+  justify-content:stretch;
+  padding: 20px 40px;
+
+  top: 0;
+}
+
+.background {
+  position: relative;
+  width: 100%;
+  height: auto;
+  opacity: 0.5;
+  display: flex;
+  justify-content:space-between;
+}
