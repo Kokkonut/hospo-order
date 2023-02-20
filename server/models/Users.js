@@ -24,8 +24,8 @@ const userSchema = new Schema({
         match: [/.+@.+\..+/, 'Must use a valid email address']
     },
     phone: {
-        type: Number,
-        required: true,
+        type: String,
+        required: false,
         unique: true,
         match: [/[0-9]{3}-[0-9]{3}-[0-9]{4}/, 'Must use a valid phone number']
     },

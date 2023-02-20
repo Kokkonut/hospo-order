@@ -1,5 +1,5 @@
 const mongoose = require('mongoose');
-P
+
 const { Schema } = mongoose;
 
 const productSchema = new Schema({
