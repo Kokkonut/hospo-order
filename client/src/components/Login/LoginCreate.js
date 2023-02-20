@@ -55,7 +55,7 @@ function LoginCreate() {
           <button type="submit">Submit</button>
         </div>
       </form>  
-      <Link to="/login">← Go back to Login</Link>
+      <Link to="/">← Go back to Login</Link>
     </div>
   );
 }
