@@ -1,21 +1,17 @@
 const mongoose = require('mongoose');
 const { AuthenticationError } = require('apollo-server-express');
-const { PubSub } = require('graphql-subscriptions')
-const pubsub = new PubSub();
 const { signToken } = require('../utils/auth');
 const { Users, Orders, Product, Category } = require('../models');
 const stripe = require('stripe')('sk_test_51MdOkPHZ2XFn2ss4q9hBkA6Ny84iAdaB6Tt039NhVLa827Z0qY9kHOwTIJv9Mu7HcULwAlJoQRnHk2vwH258kc4500Y8MIlvoQ');
 
 
 const resolvers = {
-
-  Subscription: {
-    newOrder: {
-      subscribe: () => pubsub.asyncIterator(['NEW_ORDER'])
-  }
-},
-
   Query: {
+    // query to get all orders that have been placed but not yet completed
+    getOrders: async () => {
+      return await Orders.find({ completed: false });
+    },
+
     categories: async () => {
       return await Category.find();
     },
@@ -111,7 +107,7 @@ const resolvers = {
 
     addOrder: async (parent, { products }, context) => {
       const order = new Orders({ products });
-      pubsub.publish('NEW_ORDER', { newOrder: order });
+      console.log(order)
       return order
     },
     
@@ -121,9 +117,6 @@ const resolvers = {
     //   console.log(context);
     //   if (context.user) {
     //     const order = new Orders({ products });
-    //     //new code
-    //     pubsub.publish('NEW_ORDER', { newOrder: order });
-    //     //end new code
 
     //     await Users.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
 
