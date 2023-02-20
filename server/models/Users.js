@@ -1,5 +1,9 @@
+const mongoose = require('mongoose');
+
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const Orders = require('./Orders');
+const Order = require('./Orders');
 
 
 const userSchema = new Schema({
@@ -30,21 +34,14 @@ const userSchema = new Schema({
         required: true,
         minlength: 5
     },
-    userCreated: {
-        type: Date,
-        default: Date.now
-    },
+
     isVenueOwner: {
         type: Boolean,
         default: false
     },
 
-    orders: [{
-        type: Schema.Types.ObjectId,
-        ref: 'Order'
-    }],
+    orders: [Order.schema]
 
-    //still need to add past orders.
 },
 {
         toJSON: {
