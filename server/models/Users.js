@@ -1,5 +1,9 @@
+const mongoose = require('mongoose');
+
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
+const Orders = require('./Orders');
+const Order = require('./Orders');
 
 
 const userSchema = new Schema({
@@ -20,8 +24,8 @@ const userSchema = new Schema({
         match: [/.+@.+\..+/, 'Must use a valid email address']
     },
     phone: {
-        type: Number,
-        required: true,
+        type: String,
+        required: false,
         unique: true,
         match: [/[0-9]{3}-[0-9]{3}-[0-9]{4}/, 'Must use a valid phone number']
     },
@@ -30,15 +34,14 @@ const userSchema = new Schema({
         required: true,
         minlength: 5
     },
-    userCreated: {
-        type: Date,
-        default: Date.now
-    },
+
     isVenueOwner: {
         type: Boolean,
         default: false
     },
-    //still need to add past orders.
+
+    orders: [Order.schema]
+
 },
 {
         toJSON: {
@@ -54,8 +57,11 @@ userSchema.pre('save', async function (next) {
     }
 
     next();
-}
-);
+});
+
+userSchema.methods.isCorrectPassword = async function (password) {
+    return bcrypt.compare(password, this.password);
+};
 
 userSchema.virtual ('fullName').get(function () {
     //function to return first name and last letter of last name
