@@ -24,38 +24,25 @@ const typeDefs = gql`
     address: String!
     phone: String!
     email: String!
-    menu: [MenuCategory!]!
+    menu: [category]
   }
-  
-  type MenuCategory {
+
+  type category {
     name: String!
-    items: [MenuItem!]!
+    items: [item]
   }
-  
-  type MenuItem {
+
+  type item {
     name: String!
-    description: String!
     price: Float!
-    size: [Size!]!
-    howToasted: [ToastingLevel!] # Only used for toast items
-    toppings: [Topping!] # Only used for toast items
+    description: String
+    modifiers: [modifier]
   }
-  
-  type Size {
-    name: String!
-    value: Float!
-  }
-  
-  type ToastingLevel {
-    name: String!
-    value: Float!
-  }
-  
-  type Topping {
+
+  type modifier {
     name: String!
     price: Float!
   }
-  
 
   type Mutation {
     addUser(firstName: String!, lastName: String!, email: String!, phone: String!, password: String!): Auth
@@ -65,6 +52,9 @@ const typeDefs = gql`
 
   type Query {
     hello: String
+
+    getVenues: [Venue]
+
   }
 
 
