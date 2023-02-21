@@ -47,11 +47,27 @@ export const QUERY_ALL_PRODUCTS = gql`
       price
       quantity
       category {
+        _id
         name
       }
     }
   }
 `;
+
+// export const QUERY_ALL_PRODUCTS = gql`
+//   query Product {
+//     products {
+//       category {
+//         name
+//         _id
+//       }
+//       name
+//       price
+//       description
+//       _id
+//     }
+//   }
+//   `;
 
 export const QUERY_CATEGORIES = gql`
   {
