@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../../utils/mutations';
 import Auth from '../../utils/auth';
+// import { Form, Button,  Input } from 'antd';
 
 
 function LoginMain(props) {
@@ -63,7 +64,7 @@ function LoginMain(props) {
           </div>
         ) : null}
         <div>
-          <button type="submit">Submit</button>
+          <button type="submit">Submit</button >
         </div>
       </form>
       <Link className="back" to="/">← Go back to Signup</Link>

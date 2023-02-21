@@ -7,6 +7,7 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
+import "../node_modules/antd/dist/reset.css";
 
 
 import Home from './pages/Home';
