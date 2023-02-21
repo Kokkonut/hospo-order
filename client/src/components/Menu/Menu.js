@@ -16,6 +16,8 @@ function Menu() {
 
     const { categories } = data;
 
+    console.log('2nd',categories);
+
     if (categories.length === 0) {
         return <p>No products found.</p>;
     }
@@ -23,9 +25,7 @@ function Menu() {
     return (
         <div>
         <h1>Menu</h1>
-        {categories.map((category) => (
-            <MenuCategory key={category._id} category={category} />
-        ))}
+            <MenuCategory />
         </div>
     );
     }

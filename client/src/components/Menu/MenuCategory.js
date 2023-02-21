@@ -21,6 +21,8 @@ const MenuCategory = () => {
     }
   }, [data]);
 
+  console.log('3rd', data);
+
   if (loading) {
     return <p>Loading products...</p>;
   }
