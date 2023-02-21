@@ -3,9 +3,10 @@ import { Link } from "react-router-dom";
 // import MenuMain from "../components/Menu/MenuMain";
 // import MenuCategory from "../components/MenuCategory/MenuCategory";
 import { IdcardOutlined, InfoCircleFilled, ShoppingCartOutlined } from '@ant-design/icons';
-import { Breadcrumb, Layout, theme, Menu  } from 'antd';
+import { Breadcrumb, Layout, theme, Menu } from 'antd';
 import MenuMain from "../components/Menu/MenuMain";
-const { Header, Content, Footer} = Layout;
+import BreadcrumbItem from "antd/es/breadcrumb/BreadcrumbItem";
+const { Header, Content, Footer } = Layout;
 
 
 
@@ -21,93 +22,104 @@ const Home = () => {
 
 
   return (
-    
 
-      <Layout>
-        <Header
-         breakpoint="lg"
+
+    <Layout>
+      <Header
+        breakpoint="lg"
+        style={{
+          position: 'sticky',
+          top: 0,
+          zIndex: 1,
+
+        }}
+       >
+       {/* <div
           style={{
-            position: 'sticky',
+            width: '100%',
+            height: 31,
+            margin: '16px 24px 16px 0',
+            background: 'rgba(255, 255, 255, 0.2)',
+          }}
+        /> */}
+        {/* <Menu
+          style={{
+            width: '100%',
             top: 0,
             zIndex: 1,
-            width: '100%',
+
           }}
-        > <div
-            style={{
-              float: 'left',
-              width: 120,
-              height: 31,
-              margin: '16px 24px 16px 0',
-              background: 'rgba(255, 255, 255, 0.2)',
-            }}
-          />
-          <Menu
-            theme="dark"
-            mode="horizontal"
-            defaultSelectedKeys={['2']}
-            items={new Array(3).fill(null).map((_, index) => ({
-              key: String(index + 1),
-              label: `nav ${index + 1}`,
-            }))}
-          />
-        </Header>
-        <div>
+          theme="dark"
+          mode="horizontal"
+          defaultSelectedKeys={['2']}
+          items={new Array(3).fill(null).map((_, index) => ({
+            key: String(index + 1),
+            label: "insert nav options"
+          }))}
+
+
+        /> */}
+      </Header>
+      <div>
         {/* <img href="https://liftlearning.com/wp-content/uploads/2020/09/default-image.png" alt="default"/> */}
-        <p>Temp Cafe Name</p>
+        <h2>Temp Cafe Name</h2>
         <p>Temp Cafe address</p>
-      </div>
-        <Content
-          className="site-layout"
+      </div>        
+      <Breadcrumb
           style={{
-            padding: '0 50px',
+            margin: '30px',
+            alignContent: 'center'
           }}
         >
-          <Breadcrumb
-            style={{
-              margin: '16px 0',
-            }}
-          >
-            <Breadcrumb.Item><Link to="/profile"><IdcardOutlined /></Link></Breadcrumb.Item>
-            <Breadcrumb.Item> <InfoCircleFilled onClick={handleClick} /></Breadcrumb.Item>
-            <Breadcrumb.Item><Link to="/cart"><ShoppingCartOutlined /></Link></Breadcrumb.Item>
-            
-          </Breadcrumb>
-          <div
-            style={{
-              padding: 24,
-              minHeight: 380,
-              background: colorBgContainer,
-            }}
-          >
-            
-            
+          <Breadcrumb.Item><Link to="/profile"><IdcardOutlined /></Link></Breadcrumb.Item>
+          <Breadcrumb.Item> <InfoCircleFilled onClick={handleClick} /></Breadcrumb.Item>
+          <Breadcrumb.Item><Link to="/cart"><ShoppingCartOutlined /></Link></Breadcrumb.Item>
+
+        
+        </Breadcrumb>
+      <Content
+        className="site-layout"
+        style={{
+          padding: '0 50px',
+        }}
+      >
+
+        <div
+          style={{
+            padding: 24,
+            minHeight: 380,
+            background: colorBgContainer,
+          }}
+        >
 
 
-      {showHours && (
-        <div className="hours">
-          <p>I am a blurb</p>
-          <p>Our Hours:</p>
-          <p>Mon - Fri: 6:00am to 2:00pm</p>
-          <p>Sat - Sun: 8:00am to 1:00pm</p>
+
+
+          {showHours && (
+            <div className="hours">
+              <p>I am a blurb</p>
+              <p>Our Hours:</p>
+              <p>Mon - Fri: 6:00am to 2:00pm</p>
+              <p>Sat - Sun: 8:00am to 1:00pm</p>
+            </div>
+          )}
+
+          {!showHours && (
+            < MenuMain />
+          )}
+
+
+
         </div>
-      )}
-
-      {!showHours && (
-        < MenuMain />
-      )}
-
-
-
-          </div>
-        </Content>
-        <Footer
-          style={{
-            textAlign: 'center',
-          }}
-        >
+      </Content>
+      <Footer
+        style={{
+          textAlign: 'center',
+        }}
+      >
         Created by Nic, Lara & Rickelle
-        </Footer>
-      </Layout>
+      </Footer>
+    </Layout>
 
 
   );

@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { QUERY_ALL_PRODUCTS } from '../../utils/queries';
-// import MenuItem from './MenuItem';
+import MenuItem from './MenuItem';
 // import { CaretDownOutlined } from '@ant-design/icons';
-import { Menu } from 'antd';
+import { Menu, Button, Popover } from 'antd';
+import '../../assets/App.css';
 
 const MenuCategory = () => {
   const { loading, error, data } = useQuery(QUERY_ALL_PRODUCTS);
@@ -35,25 +36,31 @@ const MenuCategory = () => {
 
   return (
     <div>
-    <Menu
-      mode="inline"
-      style={{ width: 412 }}
-      
-    >     
-      {Object.values(categories).map((category) => (
-        <Menu.SubMenu key={category._id} 
-        // icon={<CaretDownOutlined />} 
-        title={category.name}>
-          {category.products.map((product) => (
-            <Menu.Item key={product._id}>
-              {product.name} 
-              {product.description}
-              {product.price}
-            </Menu.Item>
-          ))}
-        </Menu.SubMenu>
-      ))}
-    </Menu>
+      <Menu
+        mode="inline"
+        style={{ width: '100%' }}
+
+      >
+        {Object.values(categories).map((category) => (
+          <Menu.SubMenu key={category._id}
+            // icon={<CaretDownOutlined />} 
+            title={category.name}>
+            {category.products.map((product) => (
+              <Menu.Item 
+              MenuItem
+              key={product._id}>
+
+
+                <Popover content={[product.description, product.price]} title={product.name}>
+                  <div>{product.name}</div>
+                </Popover>
+
+                
+              </Menu.Item>
+            ))}
+          </Menu.SubMenu>
+        ))}
+      </Menu>
     </div>
   );
 };

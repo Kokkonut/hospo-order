@@ -3,8 +3,8 @@ import React, { useState } from 'react';
 import { useMutation } from '@apollo/client';
 import { LOGIN } from '../../utils/mutations';
 import Auth from '../../utils/auth';
-import { LockOutlined, UserOutlined } from '@ant-design/icons';
-import { Button, Checkbox, Form, Input } from 'antd';
+// import { LockOutlined, UserOutlined } from '@ant-design/icons';
+// import { Button, Checkbox, Form, Input } from 'antd';
 
 
 function LoginMain(props) {
@@ -39,7 +39,7 @@ function LoginMain(props) {
   return (
     <div className="container">
       <h2 className='header' >Login</h2>
-      <Form name="normal_login"
+      {/* <Form name="normal_login"
         className="login-form"
         initialValues={{
           remember: true,
@@ -83,11 +83,43 @@ function LoginMain(props) {
         </Button>
 
       </Form.Item>
-    </Form>
+    </Form> */}
 
       {/* <div> 
   <Link className="back" to="/">← Go back to Signup</Link>
   </div> */}
+
+<form onSubmit={handleFormSubmit}>
+        <div>
+          <label htmlFor="email">Email address:</label>
+          <input
+            placeholder="youremail@test.com"
+            name="email"
+            type="email"
+            id="email"
+            onChange={handleChange}
+          />
+        </div>
+        <div>
+          <label htmlFor="pwd">Password:</label>
+          <input
+            placeholder="******"
+            name="password"
+            type="password"
+            id="pwd"
+            onChange={handleChange}
+          />
+        </div>
+        {error ? (
+          <div>
+            <p className="error-text">The provided credentials are incorrect</p>
+          </div>
+        ) : null}
+        <div>
+          <button type="submit">Submit</button>
+        </div>
+      </form>
+      <Link to="/">← Go back to Signup</Link>
     </div>
   );
 }
