@@ -1,19 +1,17 @@
 import { gql } from '@apollo/client';
 
 export const GET_ORDERS = gql`
-query getOrders {
-  orders {
-    _id
-    purchaseDate
-    products {
+  query getOrders {
+    getOrders {
       _id
-      name
-      price
-      quantity
+      products {
+        name
+        quantity
+      }
+      purchaseDate
+      status
     }
   }
-}
-
 `;
 
 export const QUERY_PRODUCTS = gql`
@@ -49,11 +47,27 @@ export const QUERY_ALL_PRODUCTS = gql`
       price
       quantity
       category {
+        _id
         name
       }
     }
   }
 `;
+
+// export const QUERY_ALL_PRODUCTS = gql`
+//   query Product {
+//     products {
+//       category {
+//         name
+//         _id
+//       }
+//       name
+//       price
+//       description
+//       _id
+//     }
+//   }
+//   `;
 
 export const QUERY_CATEGORIES = gql`
   {

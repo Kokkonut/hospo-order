@@ -1,3 +1,21 @@
+const MenuItem = ({ product }) => {
+    return (
+      <div>
+        <h3>{product.name}</h3>
+        <p>{product.description}</p>
+        <p>Price: ${product.price.toFixed(2)}</p>
+        <p>Quantity: {product.quantity}</p>
+      </div>
+    );
+  };
+  
+  export default MenuItem;
+
+
+
+
+
+
 // import React from 'react'
 
 // //Ignore this file for now

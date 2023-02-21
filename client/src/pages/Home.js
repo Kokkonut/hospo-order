@@ -1,5 +1,7 @@
 import React, { useState } from "react";
 import { Link } from "react-router-dom";
+import Menu from "../components/Menu/Menu";
+
 
 // import MenuCategory from "../components/MenuCategory/MenuCategory";
 
@@ -16,13 +18,13 @@ const Home = () => {
 
   return (
     <div className="container">
-      
+      {/* this need to open as model */}
       <Link to ="/profile"><IdcardOutlined /></Link>
       
-
+{/* this will need to be a css type effect  */}
       <button onClick={handleClick}><InfoCircleFilled /></button>
 
-
+{/* this needs to open as model */}
       <Link to="/cart"><ShoppingCartOutlined /></Link>
 
       <img href="https://liftlearning.com/wp-content/uploads/2020/09/default-image.png" alt="default"/>
@@ -42,7 +44,8 @@ const Home = () => {
       </div>
       )}
 
-        {/* <MenuCategory /> */}
+       < Menu />
+
 
     </div>
 
