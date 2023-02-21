@@ -4,6 +4,7 @@ import { Link } from "react-router-dom";
 // import MenuCategory from "../components/MenuCategory/MenuCategory";
 import { IdcardOutlined, InfoCircleFilled, ShoppingCartOutlined } from '@ant-design/icons';
 import { Breadcrumb, Layout, theme, Menu  } from 'antd';
+import MenuMain from "../components/Menu/MenuMain";
 const { Header, Content, Footer} = Layout;
 
 
@@ -66,10 +67,9 @@ const Home = () => {
               margin: '16px 0',
             }}
           >
-            <Breadcrumb.Item><Link to="/profile"><Link to ="/profile"><IdcardOutlined /></Link></Link></Breadcrumb.Item>
-            <Breadcrumb.Item><button onClick={handleClick}><InfoCircleFilled /></button></Breadcrumb.Item>
+            <Breadcrumb.Item><Link to="/profile"><IdcardOutlined /></Link></Breadcrumb.Item>
+            <Breadcrumb.Item> <InfoCircleFilled onClick={handleClick} /></Breadcrumb.Item>
             <Breadcrumb.Item><Link to="/cart"><ShoppingCartOutlined /></Link></Breadcrumb.Item>
-            <Breadcrumb.Item>App</Breadcrumb.Item>
             
           </Breadcrumb>
           <div
@@ -93,7 +93,7 @@ const Home = () => {
       )}
 
       {!showHours && (
-        < Menu />
+        < MenuMain />
       )}
 
 
