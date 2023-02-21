@@ -44,8 +44,9 @@ const Home = () => {
       </div>
       )}
 
-       < Menu />
-
+       {!showHours &&(
+        < Menu />
+       )}
 
     </div>
 

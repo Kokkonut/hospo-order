@@ -156,6 +156,9 @@ function LoginCreate(props) {
               onChange={handleChange}
             />
           </Form.Item>
+
+
+
           <Form.Item name="agreement" wrapperCol={{ span: 24 }}
           valuePropName="checked"
           rules={[
@@ -166,6 +169,11 @@ function LoginCreate(props) {
           ]}>
           <Checkbox > {""} Agree to out <a href='example.com'>Terms & Conditions</a></Checkbox>
         </Form.Item>
+
+
+
+
+
 
           <Form.Item wrapperCol={{ span: 24 }}>
             <Button type="primary" htmlType="submit">Submit</Button>
