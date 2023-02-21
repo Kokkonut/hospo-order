@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { QUERY_ALL_PRODUCTS } from '../../utils/queries';
-import MenuItem from './MenuItem';
+// import MenuItem from './MenuItem';
+// import { CaretDownOutlined } from '@ant-design/icons';
+import { Menu } from 'antd';
 
 const MenuCategory = () => {
   const { loading, error, data } = useQuery(QUERY_ALL_PRODUCTS);
@@ -33,17 +35,27 @@ const MenuCategory = () => {
 
   return (
     <div>
-      {categories.map(category => (
-        <div key={category._id}>
-          <h2>{category.name}</h2>
-          {category.products.map(product => (
-            <MenuItem key={product._id} product={product} />
+    <Menu
+      mode="inline"
+      style={{ width: 412 }}
+      
+    >     
+      {Object.values(categories).map((category) => (
+        <Menu.SubMenu key={category._id} 
+        // icon={<CaretDownOutlined />} 
+        title={category.name}>
+          {category.products.map((product) => (
+            <Menu.Item key={product._id}>
+              {product.name} 
+              {product.description}
+              {product.price}
+            </Menu.Item>
           ))}
-        </div>
+        </Menu.SubMenu>
       ))}
+    </Menu>
     </div>
   );
 };
 
 export default MenuCategory;
-
