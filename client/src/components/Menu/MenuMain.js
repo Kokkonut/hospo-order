@@ -1,11 +1,11 @@
-import React, { useEffect }  from "react";
-import MenuCategory from '../Menu/MenuCategory'
-import { useStoreContext } from "../../utils/GlobalState"; 
+import React, { useEffect } from "react";
+import MenuCategory from './MenuCategory'
+import { useStoreContext } from "../../utils/GlobalState";
 import { UPDATE_PRODUCTS } from "../../utils/actions";
 import { QUERY_CATEGORIES } from "../../utils/queries";
 import { useQuery } from "@apollo/client";
 
-function Menu() {
+function MenuMain() {
 
     const { loading, data } = useQuery(QUERY_CATEGORIES);
     console.log('1st', data);
@@ -16,7 +16,7 @@ function Menu() {
 
     const { categories } = data;
 
-    console.log('2nd',categories);
+    console.log('2nd', categories);
 
     if (categories.length === 0) {
         return <p>No products found.</p>;
@@ -24,10 +24,10 @@ function Menu() {
 
     return (
         <div>
-        <h1>Menu</h1>
+            <h1>Menu</h1>
             <MenuCategory />
         </div>
     );
-    }
+}
 
-export default Menu;
+export default MenuMain;
