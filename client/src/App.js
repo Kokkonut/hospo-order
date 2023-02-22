@@ -7,8 +7,6 @@ import {
   createHttpLink,
 } from '@apollo/client';
 import { setContext } from '@apollo/client/link/context';
-import "../node_modules/antd/dist/reset.css";
-
 
 import Home from './pages/Home';
 import Cart from './pages/Cart';
@@ -21,7 +19,7 @@ import Admin from './pages/Admin';
 
 import LoginMain from './components/Login/LoginMain';
 import LoginCreate from './components/Login/LoginCreate';
-// import LoginLinks from './components/Login/LoginLinks';
+import LoginLinks from './components/Login/LoginLinks';
 
 
 const httpLink = createHttpLink({
@@ -42,7 +40,6 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
-
 
 
 function App() {
