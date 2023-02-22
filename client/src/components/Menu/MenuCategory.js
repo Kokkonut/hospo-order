@@ -53,6 +53,7 @@ const MenuCategory = () => {
 
                 <Popover content={[product.description, product.price]} title={product.name}>
                   <div>{product.name}</div>
+                  {/* <div>{product.description}</div> */}
                 </Popover>
 
                 

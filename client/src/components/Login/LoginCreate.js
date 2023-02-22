@@ -41,6 +41,10 @@ function LoginCreate(props) {
       [name]: value,
     });
   };
+  
+  //   const onFinish = (values) => {
+  //   console.log('Received values of form: ', values);
+  // };
 
   return (
     <>
