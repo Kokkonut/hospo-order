@@ -10,7 +10,7 @@ const headerStyle = {
   color: 'white',
   height: 64,
   paddingInline: 20,
-  lineHeight: '50px',
+  lineHeight: 'px',
 };
 
 const MenuCategory = () => {
