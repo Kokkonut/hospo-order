@@ -57,14 +57,12 @@ mutation updateUser(
   $firstName: String
   $lastName: String
   $email: String
-  $password: String
   $phone: String
 ) {
   updateUser(
     firstName: $firstName
     lastName: $lastName
     email: $email
-    password: $password
     phone: $phone
   ) {
     _id
