@@ -4,12 +4,13 @@
   }
 
 .container {
-  padding: 20px;
+    padding: 20px;
     background-image: URL('./wallpaper.jpg');
     background-repeat: no-repeat;
     background-position: 50% 0;
     background-size: cover;
     border: 2px solid #874402;
+    
     
 }
 
@@ -60,10 +61,10 @@
   }
   
   .loginContent {
-    background-image: URL('./wallpaper.jpg') ;
+  
+  
     background-repeat: no-repeat;
     background-position: center;
-   
     width: 100%;
     height: auto;
   }
@@ -97,6 +98,7 @@ color: #874402;
 justify-content: space-around;
 padding: 20px;
 border-radius: 15px;
+right: 0;
 }
   
 /* .mcItems {

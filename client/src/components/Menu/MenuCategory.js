@@ -3,7 +3,7 @@ import { useQuery } from '@apollo/client';
 import { QUERY_ALL_PRODUCTS } from '../../utils/queries';
 import MenuItem from './MenuItem';
 import { CaretDownOutlined } from '@ant-design/icons';
-import { Button } from 'antd';
+import { Menu, Button, Popover } from 'antd';
 
 const headerStyle = {
   textAlign: 'center',
@@ -51,28 +51,55 @@ const MenuCategory = () => {
   }
 
 
-  return (
-    <div className='menuContainer'>
+  return ( 
+    
+
+    <div style={{ display: "flex "}} className='menuContainer'>
      
       
-      {categories.map(category => (
-        <div className='mcName'  key={category._id}>
-          <h2 className='mch2 
-        ' style={headerStyle} >{category.name}</h2>
-         <Button className='mcButton' icon={<CaretDownOutlined />} onClick={toggleDropdown}></Button> 
-        {dropdown && <div className='mcItems'>
-           {category.products.map(product => (
-            <MenuItem key={product._id} product={product} />
-          ))} 
-</div>}
+     <Menu
+     
+        mode="inline"
+        
 
-        </div>
-      ))}
-      
+      >
+        {Object.values(categories).map((category) => (
+          <Menu.SubMenu  
+          // className='mcName' 
+          // style={headerStyle}
+          key={category._id}
+          title={category.name}
+          ><div>
+            {category.products.map((product) => (
+              <Menu.Item style={{ height: '100%', minHeight: 0, flex: "auto" }}
+              MenuItem
+              key={product._id}><MenuItem key={product._id} product={product} />
+
+
+              </Menu.Item>
+            ))}</div>
+          </Menu.SubMenu>
+        ))}
+      </Menu>
      
     </div>
   );
 };
 
 export default MenuCategory;
+
+     
+      
+
+//     <h2 className='mch2 
+//   ' style={headerStyle} >{category.name}</h2>
+  //  <Button className='mcButton' icon={<CaretDownOutlined />} onClick={toggleDropdown}></Button> 
+  // {dropdown && <div className='mcItems'>
+  //    {category.products.map(product => (
+  //     <MenuItem key={product._id} product={product} />
+  //   ))} 
+// </div>}
+
+//   </div>
+// ))}
 
