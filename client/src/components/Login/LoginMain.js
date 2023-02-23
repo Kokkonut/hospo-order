@@ -7,26 +7,27 @@ import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
 
 
+
 function LoginMain(props) {
 
   const [formState, setFormState] = useState({ email: '', password: '' });
-  const [login, {error}] = useMutation(LOGIN);
+  const [login, { error }] = useMutation(LOGIN);
 
   const handleFormSubmit = async (event) => {
-    console.log( "Testing" + formState)
     // event.preventDefault();
     try {
-      const queryResponse = await login({
-        variables: { 
-          email: formState.email, 
-          password: formState.password
-         },
+      
+      const mutationResponse = await login({
+        variables: {
+           email: formState.email, 
+           password: formState.password 
+          },
       });
-      const token = queryResponse.data.login.token;
-      console.log( "Hello" + AuthService.login(token));
+      const token = mutationResponse.data.login.token;
       AuthService.login(token);
     } catch (error) {
       console.log(error);
+      
     }
   };
 
@@ -38,19 +39,14 @@ function LoginMain(props) {
     });
   };
 
-  // const onFinish = (values) => {
-  //   console.log('Received values of form: ', values);
-  // };
-
   return (
     <div className="container">
       <h2 className='header' >Login</h2>
       <Form
         labelCol={{ span: 10 }}
         wrapperCol={{ span: 5 }}
-        name="normal_login"
-        className="login-form"
-        onFinish={handleFormSubmit}
+        onSubmit={handleFormSubmit}
+        onFinish={handleFormSubmit} 
         >
 
 
@@ -67,7 +63,9 @@ function LoginMain(props) {
               message: 'Email is not valid'
             },
           ]}>
-          <Input prefix={<UserOutlined className="site-form-item-icon" />} placeholder="Email" />
+          <Input prefix={<UserOutlined className="site-form-item-icon" />} 
+          placeholder="Email" 
+          onChange={handleChange}/>
         </Form.Item>
         <Form.Item
           name="password"

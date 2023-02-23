@@ -2,10 +2,17 @@ import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { QUERY_ALL_PRODUCTS } from '../../utils/queries';
 import MenuItem from './MenuItem';
+import { UserOutlined } from '@ant-design/icons';
+import { Button } from 'antd';
 
 const MenuCategory = () => {
   const { loading, error, data } = useQuery(QUERY_ALL_PRODUCTS);
   const [categories, setCategories] = useState([]);
+  const [dropdown, setDropdown] = useState(false);
+  useEffect(() =>{
+    
+  }, [dropdown]
+  )
 
   useEffect(() => {
     if (data) {
@@ -31,16 +38,29 @@ const MenuCategory = () => {
     return <p>Error loading products.</p>;
   }
 
+  const handleMenuCatergoryDrop = () => {
+    
+  }
+
+
   return (
-    <div>
+    <div className='menuContainer'>
+     
+      
       {categories.map(category => (
-        <div key={category._id}>
+        <div className='mcName'  key={category._id}>
           <h2>{category.name}</h2>
-          {category.products.map(product => (
+         <Button className='mcButton' onClick={handleMenuCatergoryDrop}>^</Button> 
+            
+           {/* {category.products.map(product => (
             <MenuItem key={product._id} product={product} />
-          ))}
+          ))}  */}
+
+
         </div>
       ))}
+      
+     
     </div>
   );
 };
