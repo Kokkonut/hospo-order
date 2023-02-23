@@ -5,14 +5,22 @@ import MenuItem from './MenuItem';
 import { CaretDownOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
+const headerStyle = {
+  textAlign: 'center',
+  color: 'white',
+  height: 64,
+  paddingInline: 20,
+  lineHeight: '50px',
+};
+
 const MenuCategory = () => {
   const { loading, error, data } = useQuery(QUERY_ALL_PRODUCTS);
   const [categories, setCategories] = useState([]);
   const [dropdown, setDropdown] = useState(false);
-  useEffect(() =>{
+  // useEffect(() =>{
 
-  }, [dropdown]
-  )
+  // }, [dropdown]
+  // )
 
   useEffect(() => {
     if (data) {
@@ -38,8 +46,8 @@ const MenuCategory = () => {
     return <p>Error loading products.</p>;
   }
 
-  const handleMenuCatergoryDrop = () => {
-    
+  function toggleDropdown() {
+    setDropdown(!dropdown);
   }
 
 
@@ -49,13 +57,14 @@ const MenuCategory = () => {
       
       {categories.map(category => (
         <div className='mcName'  key={category._id}>
-          <h2 className='mch2'>{category.name}</h2>
-         <Button className='mcButton' icon={<CaretDownOutlined />} onClick={handleMenuCatergoryDrop}></Button> 
-            
-           {/* {category.products.map(product => (
+          <h2 className='mch2 
+        ' style={headerStyle} >{category.name}</h2>
+         <Button className='mcButton' icon={<CaretDownOutlined />} onClick={toggleDropdown}></Button> 
+        {dropdown && <div className='mcItems'>
+           {category.products.map(product => (
             <MenuItem key={product._id} product={product} />
-          ))}  */}
-
+          ))} 
+</div>}
 
         </div>
       ))}

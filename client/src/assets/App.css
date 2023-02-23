@@ -82,6 +82,8 @@
 }
 
 .mch2 { 
+  
+
   display: flex;
   color: #874402;
   justify-content:center;
@@ -90,11 +92,32 @@
 
 .mcButton {
 color:#874402;
-
+display: flex;
+color: #874402;
+justify-content: space-around;
+padding: 20px;
+border-radius: 15px;
 }
   
+/* .mcItems {
+display: none;
+} */
 
 .hide {
-  display: none;
+  
 
+}
+
+/* HOME.JS */
+
+.homeWrap {
+  position: relative;
+}
+
+.homeProfileIcon {
+position: absolute;
+}
+
+p {
+  background-color: #e5d4c3;
 }
