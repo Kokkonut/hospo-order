@@ -46,10 +46,6 @@ const MenuCategory = () => {
     return <p>Error loading products.</p>;
   }
 
-  function toggleDropdown() {
-    setDropdown(!dropdown);
-  }
-
 
   return ( 
     
@@ -65,8 +61,7 @@ const MenuCategory = () => {
       >
         {Object.values(categories).map((category) => (
           <Menu.SubMenu  
-          // className='mcName' 
-          // style={headerStyle}
+
           key={category._id}
           title={category.name}
           ><div>
