@@ -12,7 +12,7 @@ const linkStyle = {
 const LoginLinks = () => {
   return (
     <div className="container">
-        <div>
+        <div className='loginContent'>
             <Link to="/login" style={linkStyle}>Login</Link>
             <br/>
             <Link to="/signup" style={linkStyle}>Create Account</Link>
