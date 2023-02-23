@@ -1,5 +1,6 @@
 .App {
     text-align: center;
+
   }
 
 .container {
@@ -9,8 +10,7 @@
     background-position: 50% 0;
     background-size: cover;
     border: 2px solid #874402;
-
-
+    
 }
 
 .layoutContainer {
@@ -60,7 +60,7 @@
   }
   
   .loginContent {
-    background-image: URL('./wallpaper.jpg');
+    background-image: URL('./wallpaper.jpg') ;
     background-repeat: no-repeat;
     background-position: center;
    
@@ -77,9 +77,19 @@
 .mcName {
   display: flex;
   justify-content: space-between;
+  background-color: #e5d4c3;
+  
+}
+
+.mch2 { 
+  display: flex;
+  color: #874402;
+  justify-content:center;
+  
 }
 
 .mcButton {
+color:#874402;
 
 }
   

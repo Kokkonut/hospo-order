@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { QUERY_ALL_PRODUCTS } from '../../utils/queries';
 import MenuItem from './MenuItem';
-import { UserOutlined } from '@ant-design/icons';
+import { CaretDownOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
 const MenuCategory = () => {
@@ -10,7 +10,7 @@ const MenuCategory = () => {
   const [categories, setCategories] = useState([]);
   const [dropdown, setDropdown] = useState(false);
   useEffect(() =>{
-    
+
   }, [dropdown]
   )
 
@@ -49,8 +49,8 @@ const MenuCategory = () => {
       
       {categories.map(category => (
         <div className='mcName'  key={category._id}>
-          <h2>{category.name}</h2>
-         <Button className='mcButton' onClick={handleMenuCatergoryDrop}>^</Button> 
+          <h2 className='mch2'>{category.name}</h2>
+         <Button className='mcButton' icon={<CaretDownOutlined />} onClick={handleMenuCatergoryDrop}></Button> 
             
            {/* {category.products.map(product => (
             <MenuItem key={product._id} product={product} />
