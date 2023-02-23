@@ -1,54 +1,35 @@
-
-import React, { useState } from 'react';
-import { useMutation, useQuery } from '@apollo/client';
-import Auth from '../../utils/auth';
-import { ADD_USER } from '../../utils/mutations';
+import React from 'react'
 import { Link } from 'react-router-dom';
+import { useQuery } from '@apollo/client';
 import { QUERY_ME } from '../../utils/queries';
+import Auth from '../../utils/auth';
 
-function LoginCreate(props) {
 
-  const { loading, data } = useQuery(QUERY_ME);
+export default function EditProfile() {
 
-  console.log('The data:', data);
+    // const user = Auth.getProfile().data;
 
-  const [formState, setFormState] = useState({ email: '', password: '' });
-  const [addUser, {error}]  = useMutation(ADD_USER);
+    // console.log('The user data:',user);
 
-  const handleFormSubmit = async (event) => {
-    event.preventDefault();
-    try {
-      console.log(formState);
-    const mutationResponse = await addUser({
-      variables: {
-        email: formState.email,
-        password: formState.password,
-        firstName: formState.firstName,
-        lastName: formState.lastName,
-        phone: formState.phone,
-      },
-    });
-    const token = mutationResponse.data.addUser.token;
-    Auth.login(token);
-  } catch (error) {
-    console.log(error);
-  }
-    
-  };
+    const { loading, data } = useQuery(QUERY_ME);
 
-  const handleChange = (event) => {
-    const { name, value } = event.target;
-    setFormState({
-      ...formState,
-      [name]: value,
-    });
-  };
+    console.log('The Login:', data);
+
+    const user = data?.me || {};
 
   return (
-    <div className="container">
-    
-      <h2>Signup</h2>
-      <form
+    <div>
+      <h1>My Account</h1>
+        
+        <p>First Name: {user.firstName}</p>
+        <p>Last Name: {user.lastName}</p>
+        <p>Phone: {user.phone}</p>
+        <p>Email: {user.email}</p>
+
+        <Link to="/updateProfile">Update Profile</Link>
+
+
+        {/* <form
       onSubmit={handleFormSubmit}
       >
         <div>
@@ -104,10 +85,8 @@ function LoginCreate(props) {
         <div>
           <button type="submit">Submit</button>
         </div>
-      </form>  
-      <Link to="/">← Go back to Login</Link>
-    </div>
-  );
-}
+      </form>   */}
 
-export default LoginCreate;
+    </div>
+  )
+}

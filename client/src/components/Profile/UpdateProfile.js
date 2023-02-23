@@ -1,25 +1,19 @@
-
 import React, { useState } from 'react';
 import { useMutation, useQuery } from '@apollo/client';
+import { UPDATE_USER } from '../../utils/mutations';
 import Auth from '../../utils/auth';
-import { ADD_USER } from '../../utils/mutations';
-import { Link } from 'react-router-dom';
-import { QUERY_ME } from '../../utils/queries';
 
-function LoginCreate(props) {
 
-  const { loading, data } = useQuery(QUERY_ME);
+export default function UpdateProfile() {
 
-  console.log('The data:', data);
-
-  const [formState, setFormState] = useState({ email: '', password: '' });
-  const [addUser, {error}]  = useMutation(ADD_USER);
+    const [formState, setFormState] = useState({ email: '', password: '' });
+    const [updateUser, {error}]  = useMutation(UPDATE_USER);
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
     try {
       console.log(formState);
-    const mutationResponse = await addUser({
+    const mutationResponse = await updateUser({
       variables: {
         email: formState.email,
         password: formState.password,
@@ -28,7 +22,7 @@ function LoginCreate(props) {
         phone: formState.phone,
       },
     });
-    const token = mutationResponse.data.addUser.token;
+    const token = mutationResponse.data.updateUser.token;
     Auth.login(token);
   } catch (error) {
     console.log(error);
@@ -44,11 +38,11 @@ function LoginCreate(props) {
     });
   };
 
-  return (
-    <div className="container">
-    
-      <h2>Signup</h2>
-      <form
+    return (
+        <div>
+            <h1>Update Profile</h1>
+
+            <form
       onSubmit={handleFormSubmit}
       >
         <div>
@@ -105,9 +99,7 @@ function LoginCreate(props) {
           <button type="submit">Submit</button>
         </div>
       </form>  
-      <Link to="/">← Go back to Login</Link>
-    </div>
-  );
-}
 
-export default LoginCreate;
+        </div>
+    )
+};

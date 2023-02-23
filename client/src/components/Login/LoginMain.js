@@ -1,11 +1,16 @@
 import { Link } from 'react-router-dom';
 import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import { LOGIN } from '../../utils/mutations';
 import Auth from '../../utils/auth';
+import { QUERY_ME } from '../../utils/queries';
 
 
 function LoginMain(props) {
+
+  const { loading, data } = useQuery(QUERY_ME);
+
+  console.log('The Login:', data);
 
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [login, { error }] = useMutation(LOGIN);
