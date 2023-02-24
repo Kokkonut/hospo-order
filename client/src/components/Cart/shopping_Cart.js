@@ -31,13 +31,14 @@ export function ShoppingCartModal({ isOpen, onClose }) {
     >
       <stack gap={3}>
         {cartItems.map(item => (
-          <CartItem key={item._id} {...item} />
+          <CartItem key={item.id} {...item} />
         ))}
         <div className="ms-auto fw-bold fs-5">
           Total{" "}
           {formatCurrency(
             cartItems.reduce((total, cartItem) => {
-              const item = products.find(i => i._id === cartItem._id);
+              const item = products.find(i => i._id === cartItem.id);
+              console.log(item)
               return total + (item?.price || 0) * cartItem.quantity;
             }, 0)
           )}
