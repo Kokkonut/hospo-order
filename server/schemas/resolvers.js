@@ -7,7 +7,7 @@ const stripe = require('stripe')('sk_test_51MdOkPHZ2XFn2ss4q9hBkA6Ny84iAdaB6Tt03
 
 const resolvers = {
   Query: {
-    // query to get all orders that have been placed but not yet completed
+  // query to get all orders that have been placed but not yet completed
     getOrders: async () => {
       try {
         const orders = await Orders.find().populate("products");
@@ -69,12 +69,13 @@ const resolvers = {
       const line_items = [];
 
       const { products } = await order.populate('products');
+      console.log(args.products)
 
       for (let i = 0; i < products.length; i++) {
         const product = await stripe.products.create({
-          name: products[i].name,
-          description: products[i].description,
-          images: [`${url}/images/${products[i].image}`]
+          // name: products[i].name,
+          // description: products[i].description,
+          // images: [`${url}/images/${products[i].image}`]
         });
 
         const price = await stripe.prices.create({
@@ -109,28 +110,28 @@ const resolvers = {
     },
 
 
-    addOrder: async (parent, { products }, context) => {
-      const order = new Orders({ products });
-      await order.save();
-      console.log(order);
-      return order;
-    },
-    
-    
-
-    
     // addOrder: async (parent, { products }, context) => {
-    //   console.log(context);
-    //   if (context.user) {
-    //     const order = new Orders({ products });
-
-    //     await Users.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
-
-    //     return order;
-    //   }
-
-    //   throw new AuthenticationError('Not logged in');
+    //   const order = new Orders({ products });
+    //   await order.save();
+    //   console.log(order);
+    //   return order;
     // },
+    
+    
+
+    
+    addOrder: async (parent, { products }, context) => {
+      console.log(context);
+      if (context.user) {
+        const order = new Orders({ products });
+
+        await Users.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+
+        return order;
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
 
 
 
