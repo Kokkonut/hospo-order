@@ -19,7 +19,7 @@ import Admin from './pages/Admin';
 
 import LoginMain from './components/Login/LoginMain';
 import LoginCreate from './components/Login/LoginCreate';
-import LoginLinks from './components/Login/LoginLinks';
+// import LoginLinks from './components/Login/LoginLinks';
 
 import EditProfile from './components/Profile/EditProfile';
 import History from './components/Profile/History';
