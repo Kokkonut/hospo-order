@@ -16,7 +16,7 @@ function LoginMain(props) {
   const handleFormSubmit = async (event) => {
     // event.preventDefault();
     try {
-      
+      console.log(formState.email);
       const mutationResponse = await login({
         variables: {
            email: formState.email, 
@@ -32,6 +32,7 @@ function LoginMain(props) {
   };
 
   const handleChange = (event) => {
+    console.log(event.target)
     const { name, value } = event.target;
     setFormState({
       ...formState,
@@ -63,9 +64,12 @@ function LoginMain(props) {
               message: 'Email is not valid'
             },
           ]}>
-          <Input prefix={<UserOutlined className="site-form-item-icon" />} 
+          <Input 
+          name="email"
+          onChange={handleChange} 
+          prefix={<UserOutlined className="site-form-item-icon"  />} 
           placeholder="Email" 
-          onChange={handleChange}/>
+           />
         </Form.Item>
         <Form.Item
           name="password"
@@ -77,11 +81,13 @@ function LoginMain(props) {
             },
           ]}
         >
-          <Input
+          <Input 
+          name="password"
+          onChange={handleChange} 
             prefix={<LockOutlined className="site-form-item-icon" />}
             type="password"
             placeholder="Password"
-            onChange={handleChange}
+            
           />
         </Form.Item>
         {error ? (
