@@ -44,6 +44,9 @@ export function ShoppingCartModal({ isOpen, onClose }) {
   const { products } = productsData;
 
   // When the "Checkout" button is clicked, get a checkout session from the server using a lazy query
+  
+  //this is fucked. i need to pass an array of ids, i am doing that
+  //however it is asking for a name argument, which i am not passing
   function submitCheckout() {
     console.log('data', data)
     console.log("submit checkout")
@@ -54,7 +57,7 @@ export function ShoppingCartModal({ isOpen, onClose }) {
         productIds.push(item.id)
       }
     })
-    
+
     // const productIds = cartItems.map(({ id }) => id)
     // console.log('productIds', productIds)
 
