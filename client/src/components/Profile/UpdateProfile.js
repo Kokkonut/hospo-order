@@ -3,6 +3,8 @@ import { useMutation, useQuery } from '@apollo/client';
 import { UPDATE_USER } from '../../utils/mutations';
 import Auth from '../../utils/auth';
 import { QUERY_ME } from '../../utils/queries';
+import { Link } from "react-router-dom";
+import { CaretLeftOutlined } from '@ant-design/icons';
 
 export default function UpdateProfile() {
 
@@ -38,7 +40,7 @@ export default function UpdateProfile() {
       },
     });
 
-    window.location.assign('/editprofile');
+    window.location.assign('/myprofile');
   } catch (error) {
     console.log(error);
   }
@@ -55,6 +57,8 @@ export default function UpdateProfile() {
 
     return (
         <div>
+          <Link to="/profile" ><CaretLeftOutlined /></Link>
+
             <h1>Update Profile</h1>
 
             <form

@@ -21,7 +21,7 @@ import LoginMain from './components/Login/LoginMain';
 import LoginCreate from './components/Login/LoginCreate';
 // import LoginLinks from './components/Login/LoginLinks';
 
-import EditProfile from './components/Profile/EditProfile';
+import MyProfile from './components/Profile/MyProfile';
 import History from './components/Profile/History';
 import UpdateProfile from './components/Profile/UpdateProfile';
 
@@ -102,8 +102,8 @@ function App() {
           />
 
         <Route
-            path="/editprofile"
-            element={<EditProfile />}
+            path="/myprofile"
+            element={<MyProfile />}
           />
 
         <Route
@@ -112,7 +112,7 @@ function App() {
           />
 
         <Route
-            path="/updateProfile"
+            path="/updateprofile"
             element={<UpdateProfile />}
         />
 
