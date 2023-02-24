@@ -9,16 +9,14 @@ import {
 import { setContext } from '@apollo/client/link/context';
 
 import Home from './pages/Home';
-import Cart from './pages/Cart';
-import Item from './pages/Item';
 import Login from './pages/Login';
-import CartItems from './pages/CartItems';
 import Profile from './pages/Profile';
 import Admin from './pages/Admin';
 
 
 import LoginMain from './components/Login/LoginMain';
 import LoginCreate from './components/Login/LoginCreate';
+import { ShoppingCartProvider } from './context/ShoppingCartContext';
 // import LoginLinks from './components/Login/LoginLinks';
 
 
@@ -44,67 +42,56 @@ const client = new ApolloClient({
 
 function App() {
   return (
+    <ShoppingCartProvider>
     <ApolloProvider client={client}>
-    <Router>
-  
-    <div className="App">
+ 
+        <Router>
 
-      <header className="App-header"></header>
+          <div className="App">
 
-        <Routes>
-          
-        <Route
-            path="/"
-            element={<Login />}
-          />
+            <header className="App-header"></header>
 
-        <Route
-            path="/login"
-            element={<LoginMain />}
-          />
+            <Routes>
 
-        <Route
-            path="/signup"
-            element={<LoginCreate />}
-          />
+              <Route
+                path="/"
+                element={<Login />}
+              />
 
-        <Route 
-            path="/home" 
-            element={<Home />} 
-          />
+              <Route
+                path="/login"
+                element={<LoginMain />}
+              />
 
-        <Route
-            path="/cart"
-            element={<Cart />}
-          />
+              <Route
+                path="/signup"
+                element={<LoginCreate />}
+              />
 
-        <Route
-            path="/item"
-            element={<Item />}
-          />
+              <Route
+                path="/home"
+                element={<Home />}
+              />
 
-        <Route
-            path="/cartitems"
-            element={<CartItems />}
-          />
+              <Route
+                path="/admin"
+                element={<Admin />}
+              />
 
-        <Route
-            path="/admin"
-            element={<Admin />}
-          />
-
-        <Route
-            path="/profile"
-            element={<Profile />}
-          />
+              <Route
+                path="/profile"
+                element={<Profile />}
+              />
 
 
-        </Routes>
+            </Routes>
 
-    </div>
+          </div>
 
-    </Router>
+        </Router>
+     
     </ApolloProvider>
+    </ShoppingCartProvider>
   );
 }
 

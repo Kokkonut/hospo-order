@@ -5,6 +5,7 @@ import MenuItem from './MenuItem';
 import { CaretDownOutlined } from '@ant-design/icons';
 import { Button } from 'antd';
 
+
 const headerStyle = {
   textAlign: 'center',
   color: 'white',
@@ -17,10 +18,7 @@ const MenuCategory = () => {
   const { loading, error, data } = useQuery(QUERY_ALL_PRODUCTS);
   const [categories, setCategories] = useState([]);
   const [dropdown, setDropdown] = useState(false);
-  // useEffect(() =>{
 
-  // }, [dropdown]
-  // )
 
   useEffect(() => {
     if (data) {
@@ -36,7 +34,7 @@ const MenuCategory = () => {
     }
   }, [data]);
 
-  console.log('3rd', data);
+
 
   if (loading) {
     return <p>Loading products...</p>;
