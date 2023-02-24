@@ -3,7 +3,7 @@ import { useShoppingCart } from "../../context/ShoppingCartContext"
 import { formatCurrency } from "../../utils/formatCurrency"
 import { CartItem } from "./cart_Item"
 import { QUERY_ALL_PRODUCTS } from '../../utils/queries';
-import { Modal, Button, Stack } from 'antd';
+import { Modal, Button } from 'antd';
 
 export function ShoppingCartModal({ isOpen, onClose }) {
   const { cartItems } = useShoppingCart()
@@ -31,7 +31,7 @@ export function ShoppingCartModal({ isOpen, onClose }) {
     >
       <stack gap={3}>
         {cartItems.map(item => (
-          <CartItem key={item.id} {...item} />
+          <CartItem key={item._id} {...item} />
         ))}
         <div className="ms-auto fw-bold fs-5">
           Total{" "}

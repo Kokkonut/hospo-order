@@ -66,7 +66,7 @@ const MenuCategory = () => {
             {category.products.map((product) => (
               <Menu.Item style={{ height: '100%', minHeight: 0, flex: "auto" }}
               MenuItem
-              key={product._id}><MenuItem key={product._id} product={product} />
+              key={product._id}><MenuItem key={product._id} product={product} id={product._id}/>
 
 
               </Menu.Item>

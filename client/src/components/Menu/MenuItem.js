@@ -20,7 +20,6 @@ export function MenuItem({ product, id, name, price }) {
         <h3>{product.name}</h3>
         <p>{product.description}</p>
         <p>Price: ${product.price.toFixed(2)}</p>
-        <p>Quantity: {product.quantity}</p>
         
         {quantity === 0 ? (<button onClick={() => increaseCartQuantity(id)}>Add to cart</button> ) : (
         <div>
