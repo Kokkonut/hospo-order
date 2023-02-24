@@ -1,8 +1,8 @@
-import { Button, Stack } from "react-bootstrap"
 import { useShoppingCart } from "../../context/ShoppingCartContext"
 import { formatCurrency } from "../../utils/formatCurrency"
 import { useQuery } from "@apollo/client";
 import { QUERY_ALL_PRODUCTS } from '../../utils/queries';
+import { Button } from 'antd';
 
 export function CartItem({ id, quantity }) {
   const { removeFromCart } = useShoppingCart()
@@ -20,7 +20,7 @@ export function CartItem({ id, quantity }) {
   if (item == null) return null
 
   return (
-    <Stack direction="horizontal" gap={2} className="d-flex align-items-center">
+    <stack direction="horizontal" gap={2} className="d-flex align-items-center">
       <div className="me-auto">
         <div>
           {item.name}{" "}
@@ -38,10 +38,10 @@ export function CartItem({ id, quantity }) {
       <Button
         variant="outline-danger"
         size="sm"
-        onClick={() => removeFromCart(item.id)}
+        onClick={() => removeFromCart(item._id)}
       >
         &times;
       </Button>
-    </Stack>
+    </stack>
   )
 }
