@@ -17,6 +17,7 @@ import Admin from './pages/Admin';
 import LoginMain from './components/Login/LoginMain';
 import LoginCreate from './components/Login/LoginCreate';
 import { ShoppingCartProvider } from './context/ShoppingCartContext';
+import Success from './pages/Success';
 // import LoginLinks from './components/Login/LoginLinks';
 
 
@@ -46,13 +47,9 @@ function App() {
     <ApolloProvider client={client}>
  
         <Router>
-
           <div className="App">
-
             <header className="App-header"></header>
-
             <Routes>
-
               <Route
                 path="/"
                 element={<Login />}
@@ -83,13 +80,14 @@ function App() {
                 element={<Profile />}
               />
 
+              <Route
+                path="/success"
+                element={<Success />}
+              />
 
             </Routes>
-
           </div>
-
         </Router>
-     
     </ApolloProvider>
     </ShoppingCartProvider>
   );
