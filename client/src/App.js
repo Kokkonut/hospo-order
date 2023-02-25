@@ -21,6 +21,9 @@ import LoginMain from './components/Login/LoginMain';
 import LoginCreate from './components/Login/LoginCreate';
 // import LoginLinks from './components/Login/LoginLinks';
 
+import MyProfile from './components/Profile/MyProfile';
+import History from './components/Profile/History';
+import UpdateProfile from './components/Profile/UpdateProfile';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -98,6 +101,20 @@ function App() {
             element={<Profile />}
           />
 
+        <Route
+            path="/myprofile"
+            element={<MyProfile />}
+          />
+
+        <Route
+            path="/history"
+            element={<History />}
+          />
+
+        <Route
+            path="/updateprofile"
+            element={<UpdateProfile />}
+        />
 
         </Routes>
 
