@@ -141,7 +141,7 @@ const resolvers = {
     addOrder: async (parent, { products }, context) => {
       console.log('add order called');
       if (context.user) {
-        const order = new Order({ products });
+        const order = new Order({ products, orderBy: context.user._id });
         await order.save();
 
         await Users.findByIdAndUpdate(context.user._id, { $push: { orders: order } });

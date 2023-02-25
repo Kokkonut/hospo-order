@@ -13,16 +13,16 @@ const orderSchema = new Schema({
       ref: 'Product'
     }
   ],
-  // status: {
-  //   type: String,
-  //   enum: ['Pending', 'Accepted', 'Rejected', 'Completed'],
-  //   default: 'Pending'
-  // },
+  status: {
+    type: String,
+    enum: ['Pending', 'Accepted', 'Rejected', 'Completed'],
+    default: 'Pending'
+  },
 
-  // orderBy: {
-  //   type: Schema.Types.ObjectId,
-  //   ref: 'User'
-  // }
+  orderBy: {
+    type: Schema.Types.ObjectId,
+    ref: 'User'
+  }
   
 });
 
