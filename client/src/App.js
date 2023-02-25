@@ -20,6 +20,9 @@ import { ShoppingCartProvider } from './context/ShoppingCartContext';
 import Success from './pages/Success';
 // import LoginLinks from './components/Login/LoginLinks';
 
+import MyProfile from './components/Profile/MyProfile';
+import History from './components/Profile/History';
+import UpdateProfile from './components/Profile/UpdateProfile';
 
 const httpLink = createHttpLink({
   uri: '/graphql',
@@ -84,6 +87,41 @@ function App() {
                 path="/success"
                 element={<Success />}
               />
+
+        <Route
+            path="/item"
+            element={<Item />}
+          />
+
+        <Route
+            path="/cartitems"
+            element={<CartItems />}
+          />
+
+        <Route
+            path="/admin"
+            element={<Admin />}
+          />
+
+              <Route
+                path="/profile"
+                element={<Profile />}
+              />
+
+        <Route
+            path="/myprofile"
+            element={<MyProfile />}
+          />
+
+        <Route
+            path="/history"
+            element={<History />}
+          />
+
+        <Route
+            path="/updateprofile"
+            element={<UpdateProfile />}
+        />
 
             </Routes>
           </div>

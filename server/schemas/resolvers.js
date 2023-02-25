@@ -7,7 +7,17 @@ const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 const resolvers = {
   Query: {
-  // query to get all orders that have been placed but not yet completed
+    me: async (parent, args, context) => {
+      if (context.user) {
+        const userData = await Users.findOne({ _id: context.user._id }).select('-__v -password');
+
+        return userData;
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
+
+    // query to get all orders that have been placed but not yet completed
     getOrders: async () => {
       try {
         const orders = await Order.find().populate("products");
@@ -107,6 +117,8 @@ const resolvers = {
       return { session: session.id };
     }
   },
+
+
   Mutation: {
     addUser: async (parent, args) => {
       const user = await Users.create(args);
