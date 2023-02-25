@@ -3,6 +3,12 @@ const { gql } = require('apollo-server-express');
 //NOTES: have only added the subscription type
 
 const typeDefs = gql`
+  type ProductID {
+    id: ID!
+    name: String
+    description: String
+  }
+
   type Category {
     _id: ID
     name: String
@@ -54,6 +60,7 @@ const typeDefs = gql`
     order(_id: ID!): Order
     checkout(products: [ID]!): Checkout
     getOrders: [Order]
+    productID(_id: ID!): ProductID!
   }
 
   type Mutation {

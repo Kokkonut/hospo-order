@@ -1,8 +1,8 @@
 const mongoose = require('mongoose');
 const { AuthenticationError } = require('apollo-server-express');
 const { signToken } = require('../utils/auth');
-const { Users, Orders, Product, Category } = require('../models');
-const stripe = require('stripe')('sk_test_51MdOkPHZ2XFn2ss4q9hBkA6Ny84iAdaB6Tt039NhVLa827Z0qY9kHOwTIJv9Mu7HcULwAlJoQRnHk2vwH258kc4500Y8MIlvoQ');
+const { Users, Order, Product, Category } = require('../models');
+const stripe = require('stripe')('sk_test_4eC39HqLyjWDarjtT1zdp7dc');
 
 
 const resolvers = {
@@ -20,15 +20,17 @@ const resolvers = {
     // query to get all orders that have been placed but not yet completed
     getOrders: async () => {
       try {
-        const orders = await Orders.find().populate("products");
+        const orders = await Order.find().populate("products");
         return orders;
       } catch (error) {
         console.log(error);
       }
     },
+
     categories: async () => {
       return await Category.find();
     },
+
     products: async (parent, { category, name }) => {
       const params = {};
 
@@ -44,9 +46,11 @@ const resolvers = {
 
       return await Product.find(params).populate('category');
     },
+
     product: async (parent, { _id }) => {
       return await Product.findById(_id).populate('category');
     },
+
     user: async (parent, args, context) => {
       if (context.user) {
         const user = await Users.findById(context.user._id).populate({
@@ -61,6 +65,7 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
+
     order: async (parent, { _id }, context) => {
       if (context.user) {
         const user = await Users.findById(context.user._id).populate({
@@ -73,9 +78,11 @@ const resolvers = {
 
       throw new AuthenticationError('Not logged in');
     },
+
     checkout: async (parent, args, context) => {
+      console.log('args', args.products)
       const url = new URL(context.headers.referer).origin;
-      const order = new Orders({ products: args.products });
+      const order = new Order({ products: args.products });
       const line_items = [];
 
       const { products } = await order.populate('products');
@@ -90,7 +97,7 @@ const resolvers = {
         const price = await stripe.prices.create({
           product: product.id,
           unit_amount: products[i].price * 100,
-          currency: 'aud',
+          currency: 'usd',
         });
 
         line_items.push({
@@ -121,28 +128,29 @@ const resolvers = {
     },
 
 
-    addOrder: async (parent, { products }, context) => {
-      const order = new Orders({ products });
-      await order.save();
-      console.log(order);
-      return order;
-    },
-    
-    
-
-    
     // addOrder: async (parent, { products }, context) => {
-    //   console.log(context);
-    //   if (context.user) {
-    //     const order = new Orders({ products });
-
-    //     await Users.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
-
-    //     return order;
-    //   }
-
-    //   throw new AuthenticationError('Not logged in');
+    //   const order = new Orders({ products });
+    //   await order.save();
+    //   console.log(order);
+    //   return order;
     // },
+    
+    
+
+    
+    addOrder: async (parent, { products }, context) => {
+      console.log('add order called');
+      if (context.user) {
+        const order = new Order({ products, orderBy: context.user._id });
+        await order.save();
+
+        await Users.findByIdAndUpdate(context.user._id, { $push: { orders: order } });
+        console.log('order', order);
+        return order;
+      }
+
+      throw new AuthenticationError('Not logged in');
+    },
 
 
 
