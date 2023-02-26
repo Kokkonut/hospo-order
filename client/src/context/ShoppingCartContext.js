@@ -10,10 +10,16 @@ export function ShoppingCartProvider({ children }) {
 //   const [isOpen, setIsOpen] = useState(false)
   const [cartItems, setCartItems] = useLocalStorage("shopping-cart", [])
 
-  const cartQuantity = cartItems.reduce(
-    (quantity, item) => item.quantity + quantity,
-    0
-  )
+  //has started throwing an error
+  // const cartQuantity = cartItems.reduce(
+  //   (quantity, item) => item.quantity + quantity,
+  //   0
+  // )
+  //so I changed it to this
+  const cartQuantity = Array.isArray(cartItems)
+  ? cartItems.reduce((quantity, item) => item.quantity + quantity, 0)
+  : 0;
+
 
 //   const openCart = () => setIsOpen(true)
 //   const closeCart = () => setIsOpen(false)

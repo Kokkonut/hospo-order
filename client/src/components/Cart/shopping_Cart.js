@@ -78,8 +78,9 @@ export function ShoppingCartModal({ isOpen, onClose }) {
         </Button>
       ]}
     >
-      <stack gap={3}>
+
         {/* Render each cart item */}
+    
         {cartItems.map(item => (
           <CartItem key={item.id} {...item} />
         ))}
@@ -95,7 +96,7 @@ export function ShoppingCartModal({ isOpen, onClose }) {
             }, 0)
           )}
         </div>
-      </stack>
+
       {/* Render the "Checkout" button */}
       <button onClick={submitCheckout}>Checkout</button>
     </Modal>
