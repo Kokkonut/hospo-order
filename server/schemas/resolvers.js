@@ -20,12 +20,18 @@ const resolvers = {
     // query to get all orders that have been placed but not yet completed
     getOrders: async () => {
       try {
-        const orders = await Order.find().populate("products");
+        const orders = await Order.find().populate({
+          path: 'orderBy',
+          model: 'Users',
+          select: 'firstName'
+        });
         return orders;
       } catch (error) {
         console.log(error);
       }
     },
+    
+
 
     categories: async () => {
       return await Category.find();

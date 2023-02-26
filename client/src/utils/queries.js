@@ -10,6 +10,11 @@ export const GET_ORDERS = gql`
       }
       purchaseDate
       status
+      orderBy {
+        _id
+        firstName
+      }
+
     }
   }
 `;
