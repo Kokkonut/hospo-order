@@ -5,15 +5,23 @@ import { CaretLeftOutlined } from '@ant-design/icons';
 export default function Profile() {
 
   return (
-    <div>
-      <Link to="/home" ><CaretLeftOutlined /></Link>
+    <div className="container">
+      <div className="profileContainer">
 
-      <h1>My Profile</h1>
-        <Link to ="/myprofile">My Profile</Link>
-          <br/>
-        <Link to ="/history">History</Link>
+      <div className="profileHeader">
+        <Link to="/home" ><CaretLeftOutlined /></Link>
+
+        <h1>My Profile</h1>
+      </div>
+
+
+        <Link to ="/myprofile" className="profileItem">My Profile</Link>
         <br/>
-        <button>Sign Out</button>
+        <Link to ="/history" className="profileItem">History</Link>
+        <br/>
+        <Link to="/"><button className="profileItem">Sign Out</button></Link>
+        
+      </div>
     </div>
   )
 }
