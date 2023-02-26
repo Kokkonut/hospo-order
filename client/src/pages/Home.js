@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+// import { Link } from "react-router-dom";
 import Menu from "../components/Menu/Menu";
 import heroImage from "../assets/hero.jpg";
 import Nav from "../components/Nav/Nav";
@@ -27,7 +27,7 @@ const Home = () => {
           backgroundPosition: "center",
           backgroundSize: "cover",
           boxShadow: 5,
-          
+
           height: "200px",
           
         }}

@@ -1,6 +1,5 @@
 .App {
   text-align: center;
-
 }
 
 .container {
@@ -49,15 +48,9 @@
   opacity: 0.5;
   display: flex;
   justify-content: space-between;
-
 }
 
-
 .loginContent {
-
-
-  background-repeat: no-repeat;
-  background-position: center;
   width: 100%;
   height: auto;
 }
@@ -101,7 +94,7 @@
 .homeProfileIcon {
   position: absolute;
 }
-
+/* this needs fixing in a parent styling */
 .infoButton {
   border-radius: 50% !important;
   color: rgb(255, 255, 255);
@@ -111,13 +104,36 @@
   font-size: 24px;
   background: none;
   border: none;
-  justify-self: flex-end;
 
 }
 
-/* .infoButton:hover {
-  color: rgba(255, 255, 255, 1);
-  box-shadow: 3px 5px 5px rgba(252, 252, 252, 0.4);
-} */
+/* MENU DROPDOWN BUTTONS */
+/* These dont need touching */
+.buttonStyle {
+  background-color:#f2e9df;
+  border-radius: 50%;
+  border: 1px solid #000000;
+  margin:5px;
+}
 
-/* MENU */
+.buttonStyleRemove {
+  background-color:#f2e9df;
+  border-radius: 10px;
+  border: 1px solid #000000;
+  margin:5px;
+}
+
+.buttonStyleRemove:hover {
+  color: rgba(255, 255, 255, 1);
+} 
+
+.buttonStyleAdd {
+  background-color:#f2e9df;
+  border-radius: 10px;
+  border: 1px solid #000000;
+  margin:5px;
+}
+
+.buttonStyleAdd:hover {
+  color: rgba(255, 255, 255, 1);
+} 
