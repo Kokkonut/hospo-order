@@ -23,8 +23,6 @@ const Home = () => {
   const handleClick = () => setShowHours(!showHours);
 
 
-
-
   return (
     <div className="container">
 
@@ -56,16 +54,18 @@ const Home = () => {
       </div>
       
 
-      {showHours && (
+      {showHours ? ( 
       <div className="hours">
         <p>I am a blurb</p>
         <p>Our Hours:</p>
         <p>Mon - Fri: 6:00am to 2:00pm</p>
         <p>Sat - Sun: 8:00am to 1:00pm</p>
-      </div>
+      </div>) : 
+      (
+     < Menu />
       )}
 
-       < Menu />
+       
 
 
     </div>

@@ -24,6 +24,7 @@ function LoginMain(props) {
           },
       });
       const token = mutationResponse.data.login.token;
+      // console.log(mutationResponse.data);
       AuthService.login(token);
     } catch (error) {
       console.log(error);
