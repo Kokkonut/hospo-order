@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Link } from "react-router-dom";
 import Menu from "../components/Menu/Menu";
 import heroImage from "../assets/hero.jpg";
+import Nav from "../components/Nav/Nav";
 // import MenuCategory from "../components/MenuCategory/MenuCategory";
 
 import { IdcardOutlined, InfoCircleFilled, ShoppingCartOutlined } from '@ant-design/icons';
@@ -24,9 +25,10 @@ const Home = () => {
 
 
   return (
+
     <div className="container">
 
-    
+    <Nav />
           <div className="homeWrap"
       style={{
         backgroundImage: `url(${heroImage})`,

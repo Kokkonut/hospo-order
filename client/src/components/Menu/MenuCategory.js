@@ -5,6 +5,7 @@ import MenuItem from './MenuItem';
 import { CaretDownOutlined } from '@ant-design/icons';
 import { Menu, Button, Popover } from 'antd';
 
+
 const headerStyle = {
   textAlign: 'center',
   color: 'white',
@@ -17,10 +18,7 @@ const MenuCategory = () => {
   const { loading, error, data } = useQuery(QUERY_ALL_PRODUCTS);
   const [categories, setCategories] = useState([]);
   const [dropdown, setDropdown] = useState(false);
-  // useEffect(() =>{
 
-  // }, [dropdown]
-  // )
 
   useEffect(() => {
     if (data) {
@@ -36,7 +34,7 @@ const MenuCategory = () => {
     }
   }, [data]);
 
-  console.log('3rd', data);
+
 
   if (loading) {
     return <p>Loading products...</p>;
@@ -68,7 +66,7 @@ const MenuCategory = () => {
             {category.products.map((product) => (
               <Menu.Item style={{ height: '100%', minHeight: 0, flex: "auto" }}
               MenuItem
-              key={product._id}><MenuItem key={product._id} product={product} />
+              key={product._id}><MenuItem key={product._id} product={product} id={product._id}/>
 
 
               </Menu.Item>

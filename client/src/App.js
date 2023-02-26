@@ -1,37 +1,38 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React from "react";
+import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import {
   ApolloClient,
   InMemoryCache,
   ApolloProvider,
   createHttpLink,
-} from '@apollo/client';
-import { setContext } from '@apollo/client/link/context';
+} from "@apollo/client";
+import { setContext } from "@apollo/client/link/context";
 
-import Home from './pages/Home';
-import Cart from './pages/Cart';
-import Item from './pages/Item';
-import Login from './pages/Login';
-import CartItems from './pages/CartItems';
-import Profile from './pages/Profile';
-import Admin from './pages/Admin';
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Profile from "./pages/Profile";
+import Admin from "./pages/Admin";
 
-
-import LoginMain from './components/Login/LoginMain';
-import LoginCreate from './components/Login/LoginCreate';
+import LoginMain from "./components/Login/LoginMain";
+import LoginCreate from "./components/Login/LoginCreate";
+import { ShoppingCartProvider } from "./context/ShoppingCartContext";
+import Success from "./pages/Success";
 // import LoginLinks from './components/Login/LoginLinks';
 
+import MyProfile from "./components/Profile/MyProfile";
+import History from "./components/Profile/History";
+import UpdateProfile from "./components/Profile/UpdateProfile";
 
 const httpLink = createHttpLink({
-  uri: '/graphql',
+  uri: "/graphql",
 });
 
 const authLink = setContext((_, { headers }) => {
-  const token = localStorage.getItem('id_token');
+  const token = localStorage.getItem("id_token");
   return {
     headers: {
       ...headers,
-      authorization: token ? `Bearer ${token}` : '',
+      authorization: token ? `Bearer ${token}` : "",
     },
   };
 });
@@ -41,70 +42,40 @@ const client = new ApolloClient({
   cache: new InMemoryCache(),
 });
 
-
 function App() {
   return (
-    <ApolloProvider client={client}>
-    <Router>
-  
-    <div className="App">
+    <ShoppingCartProvider>
+      <ApolloProvider client={client}>
+        <Router>
+          <div className="App">
+            <header className="App-header"></header>
+            <Routes>
+              <Route path="/" element={<Login />} />
 
-      <header className="App-header"></header>
+              <Route path="/login" element={<LoginMain />} />
 
-        <Routes>
-          
-        <Route
-            path="/"
-            element={<Login />}
-          />
+              <Route path="/signup" element={<LoginCreate />} />
 
-        <Route
-            path="/login"
-            element={<LoginMain />}
-          />
+              <Route path="/home" element={<Home />} />
 
-        <Route
-            path="/signup"
-            element={<LoginCreate />}
-          />
+              <Route path="/admin" element={<Admin />} />
 
-        <Route 
-            path="/home" 
-            element={<Home />} 
-          />
+              <Route path="/profile" element={<Profile />} />
 
-        <Route
-            path="/cart"
-            element={<Cart />}
-          />
+              <Route path="/success" element={<Success />} />
 
-        <Route
-            path="/item"
-            element={<Item />}
-          />
+              <Route path="/profile" element={<Profile />} />
 
-        <Route
-            path="/cartitems"
-            element={<CartItems />}
-          />
+              <Route path="/myprofile" element={<MyProfile />} />
 
-        <Route
-            path="/admin"
-            element={<Admin />}
-          />
+              <Route path="/history" element={<History />} />
 
-        <Route
-            path="/profile"
-            element={<Profile />}
-          />
-
-
-        </Routes>
-
-    </div>
-
-    </Router>
-    </ApolloProvider>
+              <Route path="/updateprofile" element={<UpdateProfile />} />
+            </Routes>
+          </div>
+        </Router>
+      </ApolloProvider>
+    </ShoppingCartProvider>
   );
 }
 

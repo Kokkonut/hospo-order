@@ -1,13 +1,19 @@
 
 import React, { useState } from 'react';
-import { useMutation } from '@apollo/client';
+import { useMutation, useQuery } from '@apollo/client';
 import AuthService from '../../utils/auth';
 import { ADD_USER } from '../../utils/mutations';
 import { Link } from 'react-router-dom';
 import { Form, Button, Input, Checkbox } from 'antd';
 import '../../assets/App.css'
 
+import { QUERY_ME } from '../../utils/queries';
+
 function LoginCreate(props) {
+
+  const { loading, data } = useQuery(QUERY_ME);
+
+  console.log('The data:', data);
 
   const [formState, setFormState] = useState({ email: '', password: '' });
   const [addUser] = useMutation(ADD_USER);

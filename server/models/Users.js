@@ -2,8 +2,8 @@ const mongoose = require('mongoose');
 
 const { Schema, model } = require('mongoose');
 const bcrypt = require('bcrypt');
-const Orders = require('./Orders');
-const Order = require('./Orders');
+const Orders = require('./Order');
+const Order = require('./Order');
 
 
 const userSchema = new Schema({
@@ -27,7 +27,7 @@ const userSchema = new Schema({
         type: String,
         required: false,
         unique: false,
-        match: [/[0-9]{3}-[0-9]{3}-[0-9]{4}/, 'Must use a valid phone number']
+        match: [/^\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}$/, 'Must use a valid phone number']
     },
     password: {
         type: String,

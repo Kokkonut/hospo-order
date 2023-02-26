@@ -1,24 +1,35 @@
-const MenuItem = ({ product }) => {
+import { useShoppingCart } from "../../context/ShoppingCartContext"
+import { formatCurrency } from "../../utils/formatCurrency"
 
-  const quantity = 1;
-  // currently hard-coded to 1, but will be updated to reflect the quantity of the product in the user's cart
+
+export function MenuItem({ product, id, name, price }) {
+  const {
+    getItemQuantity,
+    increaseCartQuantity,
+    decreaseCartQuantity,
+    removeFromCart
+  } = useShoppingCart()
+  //got to check this
+  const quantity = getItemQuantity(id)
+  // const quantity = getItemQuantity()
+
+
 
     return (
       <div>
         <h3>{product.name}</h3>
         <p>{product.description}</p>
         <p>Price: ${product.price.toFixed(2)}</p>
-        <p>Quantity: {product.quantity}</p>
         
-        {quantity === 0 ? (<button>Add to cart</button> ) : (
+        {quantity === 0 ? (<button onClick={() => increaseCartQuantity(id)}>Add to cart</button> ) : (
         <div>
           <div>
-            <button>+</button>
+            <button onClick={() => increaseCartQuantity(id)}>+</button>
               {quantity} in cart
-            <button>-</button>
+            <button onClick={() => decreaseCartQuantity(id)}>-</button>
           </div>
 
-          <button>Remove from cart</button>
+          <button onClick={() => removeFromCart(id)}>Remove from cart</button>
         </div>
         )}
 
