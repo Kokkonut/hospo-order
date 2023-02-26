@@ -1,9 +1,8 @@
 import React, { useState, useEffect } from 'react';
 import { useQuery } from '@apollo/client';
 import { GET_ORDERS } from '../utils/queries';
-import Order from '../components/Admin/Order';
-import {getTimeSinceOrderPlaced } from '../utils/helpers';
-
+import OrderItem from '../components/Admin/OrderItem';
+import { getTimeSinceOrderPlaced } from '../utils/helpers';
 
 const Admin = () => {
   const { loading, data } = useQuery(GET_ORDERS);
@@ -23,18 +22,16 @@ const Admin = () => {
     <div>
       <h1>Admin</h1>
       {getOrders.map((order) => {
-        const { purchaseDate, status, products } = order;
+        const { _id, purchaseDate, status, products } = order;
         const timeSinceOrderPlaced = getTimeSinceOrderPlaced(purchaseDate);
 
         return (
-          <div key={order._id}>
+          <div key={_id}>
             <p>Order Time: {timeSinceOrderPlaced}</p>
             <p>Status: {status}</p>
             <ul>
               {products.map((product) => (
-                <li key={product.name}>
-                  {product.name} - {product.quantity}
-                </li>
+                <OrderItem key={product._id} product={product} />
               ))}
             </ul>
           </div>
