@@ -1,17 +1,12 @@
 .App {
-    text-align: center;
+  text-align: center;
 
-  }
+}
 
 .container {
-    padding: 20px;
-    background-image: URL('./wallpaper.jpg');
-    background-repeat: no-repeat;
-    background-position: 50% 0;
-    background-size: cover;
-    border: 2px solid #874402;
-    
-    
+  padding: 20px;
+  background-color: hsl(33, 65%, 97%);
+  border: 2px solid #874402;
 }
 
 .layoutContainer {
@@ -21,91 +16,81 @@
   width: 100%;
   height: 100%;
 }
-  /* LOGIN PAGES */
-  .back {
-    background-color: #874402;
-    color: white;
-    position: relative;
-  
-    display: flex;
-    justify-content: space-between;
-    padding: 20px 40px;
-  
-    bottom: 0;
-  }
-  
-  .header {
-    background-color: #874402;
-    color: white;
-    position: relative;
-  
-    display: flex;
-    justify-content:stretch;
-    padding: 20px 40px;
-  
-    top: 0;
-  }
-  
-  .background {
-    position: relative;
-    width: 100%;
-    height: auto;
-    opacity: 0.5;
-    display: flex;
-    justify-content:space-between; 
-    
-  }
 
-  
-  .loginContent {
-  
+/* LOGIN PAGES */
+.back {
+  background-color: #874402;
+  color: white;
+  position: relative;
 
-    background-repeat: no-repeat;
-    background-position: center;
-    width: 100%;
-    height: auto;
-  }
-  
-  /*  MENUCATEGORY */
-  
-/* .menuContainer {
-    
-} */
-  
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 40px;
+
+  bottom: 0;
+}
+
+.header {
+  background-color: #874402;
+  color: white;
+  position: relative;
+
+  display: flex;
+  justify-content: stretch;
+  padding: 20px 40px;
+
+  top: 0;
+}
+
+.background {
+  position: relative;
+  width: 100%;
+  height: auto;
+  opacity: 0.5;
+  display: flex;
+  justify-content: space-between;
+
+}
+
+
+.loginContent {
+
+
+  background-repeat: no-repeat;
+  background-position: center;
+  width: 100%;
+  height: auto;
+}
+
+/*  MENUCATEGORY */
+
 .mcName {
   display: flex;
   justify-content: space-between;
-  background-color: #e5d4c3;
-  
+  background-color: #f2e9df;
+
 }
 
-.mch2 { 
-  
+.mch2 {
+
 
   display: flex;
   color: #874402;
-  justify-content:center;
-  
+  justify-content: center;
+
 }
 
 .mcButton {
-color:#874402;
-display: flex;
-color: #874402;
-justify-content: space-around;
-padding: 20px;
-border-radius: 15px;
-right: 0;
+  color: #874402;
+  display: flex;
+  color: #874402;
+  justify-content: space-around;
+  padding: 20px;
+  border-radius: 15px;
+  right: 0;
 }
-  
-/* .mcItems {
-display: none;
-} */
 
-.hide {
-  
 
-}
 
 /* HOME.JS */
 
@@ -114,9 +99,25 @@ display: none;
 }
 
 .homeProfileIcon {
-position: absolute;
+  position: absolute;
 }
 
-p {
-  background-color: #e5d4c3;
+.infoButton {
+  border-radius: 50% !important;
+  color: rgb(255, 255, 255);
+  text-decoration: none;
+  font-weight: normal;
+  /* transition: all 0.2s ease-in-out; */
+  font-size: 24px;
+  background: none;
+  border: none;
+  justify-self: flex-end;
+
 }
+
+/* .infoButton:hover {
+  color: rgba(255, 255, 255, 1);
+  box-shadow: 3px 5px 5px rgba(252, 252, 252, 0.4);
+} */
+
+/* MENU */
