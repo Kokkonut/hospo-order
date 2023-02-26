@@ -1,6 +1,6 @@
 import { useShoppingCart } from "../../context/ShoppingCartContext"
 import { formatCurrency } from "../../utils/formatCurrency"
-
+import '../../assets/App.css'
 
 export function MenuItem({ product, id, name, price }) {
   const {
@@ -21,15 +21,15 @@ export function MenuItem({ product, id, name, price }) {
         <p>{product.description}</p>
         <p>Price: ${product.price.toFixed(2)}</p>
         
-        {quantity === 0 ? (<button onClick={() => increaseCartQuantity(id)}>Add to cart</button> ) : (
+        {quantity === 0 ? (<button className="buttonStyleAdd" onClick={() => increaseCartQuantity(id)}>Add to cart</button> ) : (
         <div>
           <div>
-            <button onClick={() => increaseCartQuantity(id)}>+</button>
+            <button className="buttonStyle" onClick={() => increaseCartQuantity(id)}>+</button>
               {quantity} in cart
-            <button onClick={() => decreaseCartQuantity(id)}>-</button>
+            <button className="buttonStyle" onClick={() => decreaseCartQuantity(id)}>-</button>
           </div>
 
-          <button onClick={() => removeFromCart(id)}>Remove from cart</button>
+          <button className="buttonStyleRemove" onClick={() => removeFromCart(id)}>Remove from cart</button>
         </div>
         )}
 

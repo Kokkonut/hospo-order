@@ -4,6 +4,7 @@ import { ShoppingCartOutlined, UserOutlined } from "@ant-design/icons";
 import { Row, Col } from "antd";
 import { useShoppingCart } from "../../context/ShoppingCartContext";
 import ShoppingCartModal from "../Cart/shopping_Cart";
+import { Link } from 'react-router-dom';
 
 const { Header } = Layout;
 
@@ -23,8 +24,10 @@ export function Nav() {
     <>
       <Header style={{ background: "transparent" }}>
         <Row justify="space-between" align="middle">
-          <Col flex="100px">
+          <Col flex="100px"><Link to ="/profile">
+               {/* this need to open as model */}
             <Avatar size={40} icon={<UserOutlined />} />
+            </Link>
           </Col>
           <Col flex="auto" style={{ textAlign: "center" }}>
             <h2>Cafe Name</h2>
