@@ -1,6 +1,8 @@
 import { useShoppingCart } from "../../context/ShoppingCartContext"
 import { formatCurrency } from "../../utils/formatCurrency"
 import '../../assets/App.css'
+import { PlusCircleOutlined, MinusCircleOutlined } from "@ant-design/icons";
+
 
 export function MenuItem({ product, id, name, price }) {
   const {
@@ -24,9 +26,9 @@ export function MenuItem({ product, id, name, price }) {
         {quantity === 0 ? (<button className="buttonStyleAdd" onClick={() => increaseCartQuantity(id)}>Add to cart</button> ) : (
         <div>
           <div>
-            <button className="buttonStyle" onClick={() => increaseCartQuantity(id)}>+</button>
+            <button onClick={() => increaseCartQuantity(id)}><PlusCircleOutlined /></button>
               {quantity} in cart
-            <button className="buttonStyle" onClick={() => decreaseCartQuantity(id)}>-</button>
+            <button className="buttonStyle" onClick={() => decreaseCartQuantity(id)}><MinusCircleOutlined /></button>
           </div>
 
           <button className="buttonStyleRemove" onClick={() => removeFromCart(id)}>Remove from cart</button>
