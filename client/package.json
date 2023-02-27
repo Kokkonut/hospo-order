@@ -15,7 +15,7 @@
     "jwt-decode": "^2.2.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
-    "react-router-dom": "^6.2.1",
+    "react-router-dom": "^6.8.1",
     "react-scripts": "4.0.2"
   },
   "scripts": {

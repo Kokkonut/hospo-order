@@ -7,18 +7,15 @@ import {
   createHttpLink,
 } from "@apollo/client";
 import { setContext } from "@apollo/client/link/context";
+import { ShoppingCartProvider } from "./context/ShoppingCartContext";
 
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Profile from "./pages/Profile";
 import Admin from "./pages/Admin";
-
 import LoginMain from "./components/Login/LoginMain";
 import LoginCreate from "./components/Login/LoginCreate";
-import { ShoppingCartProvider } from "./context/ShoppingCartContext";
 import Success from "./pages/Success";
-// import LoginLinks from './components/Login/LoginLinks';
-
 import MyProfile from "./components/Profile/MyProfile";
 import History from "./components/Profile/History";
 import UpdateProfile from "./components/Profile/UpdateProfile";
@@ -41,6 +38,14 @@ const client = new ApolloClient({
   link: authLink.concat(httpLink),
   cache: new InMemoryCache(),
 });
+
+// if (Auth.loggedIn()) {
+//   window.location.assign("/home");
+// } else {
+//   window.location.assign("/login");
+// }
+
+
 
 function App() {
   return (

@@ -18,7 +18,7 @@ export function ShoppingCartModal({ isOpen, onClose }) {
   const { cartItems } = useShoppingCart();
   // Use a lazy query to fetch the checkout session from the server when the "Checkout" button is clicked
   const [getCheckout, { loading, data, error }] = useLazyQuery(QUERY_CHECKOUT);
-  console.log("lazydata", loading, data, error);
+
 
   // Redirect to Stripe checkout page when a checkout session is returned from the server
   useEffect(() => {
@@ -50,8 +50,7 @@ export function ShoppingCartModal({ isOpen, onClose }) {
   //this is fucked. i need to pass an array of ids, i am doing that
   //however it is asking for a name argument, which i am not passing
   function submitCheckout() {
-    console.log("data", data);
-    console.log("submit checkout");
+
     // Get an array of product IDs from the cart items
     const productIds = [];
     cartItems.forEach((item) => {

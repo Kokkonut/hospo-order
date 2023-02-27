@@ -1,16 +1,16 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import { useQuery, useMutation } from "@apollo/client";
 import { GET_ORDERS } from "../utils/queries";
 import { UPDATE_ORDER_STATUS } from "../utils/mutations";
 import OrderItem from "../components/Admin/OrderItem";
 import { getTimeSinceOrderPlaced } from "../utils/helpers";
 import { Row, Col, Button } from "antd";
-import "../components/Admin/Admin.css"
+import "../components/Admin/Admin.css";
 
 const Admin = () => {
   const { loading, data } = useQuery(GET_ORDERS);
   const [updateOrderStatus] = useMutation(UPDATE_ORDER_STATUS);
-  console.log("1st", data);
+
 
   if (loading) {
     return <p>Loading...</p>;
@@ -22,7 +22,7 @@ const Admin = () => {
     return <p>No orders found.</p>;
   }
 
-const handleStatusUpdate = (_id, status) => {
+  const handleStatusUpdate = (_id, status) => {
     updateOrderStatus({
       variables: {
         _id,
@@ -33,14 +33,14 @@ const handleStatusUpdate = (_id, status) => {
   };
 
   return (
-<div>
+    <div>
       <h1>Admin</h1>
       {getOrders.map((order) => {
         const { _id, purchaseDate, status, orderBy, products } = order;
         const timeSinceOrderPlaced = getTimeSinceOrderPlaced(purchaseDate);
 
         return (
-          <div key={_id} className="order-container">
+          <div key={_id}>
             <Row gutter={[16, 16]}>
               <Col span={4}>{orderBy.firstName}</Col>
               <Col span={6}>
@@ -53,16 +53,25 @@ const handleStatusUpdate = (_id, status) => {
                 <div className="button-container">
                   {status === "Pending" && (
                     <>
-                      <Button type="link" onClick={() => handleStatusUpdate(_id, "Rejected")}>
+                      <Button
+                        type="link"
+                        onClick={() => handleStatusUpdate(_id, "Rejected")}
+                      >
                         Reject
                       </Button>
-                      <Button type="primary" onClick={() => handleStatusUpdate(_id, "Accepted")}>
+                      <Button
+                        type="primary"
+                        onClick={() => handleStatusUpdate(_id, "Accepted")}
+                      >
                         Accept
                       </Button>
                     </>
                   )}
                   {status === "Accepted" && (
-                    <Button type="primary" onClick={() => handleStatusUpdate(_id, "Completed")}>
+                    <Button
+                      type="primary"
+                      onClick={() => handleStatusUpdate(_id, "Completed")}
+                    >
                       Complete
                     </Button>
                   )}
