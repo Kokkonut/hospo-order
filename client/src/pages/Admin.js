@@ -40,7 +40,7 @@ const Admin = () => {
         const timeSinceOrderPlaced = getTimeSinceOrderPlaced(purchaseDate);
 
         return (
-          <div key={_id}>
+          <div key={_id} className='container'>
             <Row gutter={[16, 16]}>
               <Col span={4}>{orderBy.firstName}</Col>
               <Col span={6}>
