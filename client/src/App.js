@@ -20,6 +20,7 @@ import MyProfile from "./components/Profile/MyProfile";
 import History from "./components/Profile/History";
 import UpdateProfile from "./components/Profile/UpdateProfile";
 
+
 const httpLink = createHttpLink({
   uri: "/graphql",
 });

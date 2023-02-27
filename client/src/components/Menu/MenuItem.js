@@ -1,7 +1,8 @@
 import { useShoppingCart } from "../../context/ShoppingCartContext"
 import { formatCurrency } from "../../utils/formatCurrency"
 import '../../assets/App.css'
-import { PlusCircleOutlined, MinusCircleOutlined } from "@ant-design/icons";
+import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
+import { Button } from "antd";
 
 
 export function MenuItem({ product, id, name, price }) {
@@ -23,15 +24,15 @@ export function MenuItem({ product, id, name, price }) {
         <p>{product.description}</p>
         <p>Price: ${product.price.toFixed(2)}</p>
         
-        {quantity === 0 ? (<button className="buttonStyleAdd" onClick={() => increaseCartQuantity(id)}>Add to cart</button> ) : (
+        {quantity === 0 ? (<Button className="buttonStyleAdd" onClick={() => increaseCartQuantity(id)}>Add to cart</Button> ) : (
         <div>
           <div>
-            <button onClick={() => increaseCartQuantity(id)}><PlusCircleOutlined /></button>
+            <Button className="buttonStyleRemove" onClick={() => increaseCartQuantity(id)}><PlusOutlined /></Button>
               {quantity} in cart
-            <button className="buttonStyle" onClick={() => decreaseCartQuantity(id)}><MinusCircleOutlined /></button>
+            <Button className="buttonStyleRemove" onClick={() => decreaseCartQuantity(id)}><MinusOutlined /></Button>
           </div>
 
-          <button className="buttonStyleRemove" onClick={() => removeFromCart(id)}>Remove from cart</button>
+          <Button className="buttonStyleRemove" onClick={() => removeFromCart(id)}>Remove from cart</Button>
         </div>
         )}
 

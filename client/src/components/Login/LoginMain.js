@@ -5,6 +5,7 @@ import { LOGIN } from '../../utils/mutations';
 import AuthService from '../../utils/auth';
 import { LockOutlined, UserOutlined } from '@ant-design/icons';
 import { Button, Form, Input } from 'antd';
+import '../../assets/App.css'
 
 import { QUERY_ME } from '../../utils/queries';
 
@@ -49,7 +50,8 @@ function LoginMain(props) {
   return (
     <div className="container">
       <h2 className='header' >Login</h2>
-      <Form
+      <Form 
+      className='loginForm'
         labelCol={{ span: 10 }}
         wrapperCol={{ span: 5 }}
         onSubmit={handleFormSubmit}

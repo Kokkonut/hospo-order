@@ -1,11 +1,27 @@
-* { 
+/* * { 
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+} */
+
+html, body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
 }
 
+#root {
+  min-height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+main {
+  flex-grow: 1;
+}
 .App {
   text-align: center;
+  /* background-image: url("../assets/wallpaper.jpg"); */
   background-size: 100%;
   background-position: center;
   background-attachment: fixed;
@@ -24,6 +40,7 @@
 }
 
 .layoutContainer {
+  
   display: flex;
   justify-content: space-around;
   color: #874402;
@@ -68,6 +85,19 @@
 .loginContent {
   width: 100%;
   height: auto;
+}
+
+.loginForm {
+  margin: 20px;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  background-color: #fff;
+}
+
+.loginForm label {
+  display: block;
+  margin-bottom: 10px;
 }
 
 /*  MENUCATEGORY */
@@ -126,7 +156,7 @@
 /* These dont need touching */
 .buttonStyle {
   background-color:#f2e9df;
-  border-radius: 50%;
+  border-radius: 50% !important;
   border: 1px solid #000000;
   margin:5px;
 }
