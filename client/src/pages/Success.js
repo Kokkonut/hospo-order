@@ -2,6 +2,8 @@ import React, { useEffect } from "react";
 import { useMutation } from "@apollo/client";
 import { ADD_ORDER } from "../utils/mutations";
 import { useLocalStorage } from "../hooks/useLocalStorage";
+// import { Link } from 'react-router-dom';
+import { Result, Button, Spin } from 'antd';
 
 function Success() {
   const [cart, setCart] = useLocalStorage("shopping-cart", {});
@@ -34,17 +36,33 @@ function Success() {
 
       setTimeout(() => {
         window.location.assign("/home");
-      } , 3000);
+      }, 3000);
     }
 
     saveOrder();
   }, [addOrder, cart, setCart]);
 
+
+
   return (
     <div>
-      <h1>Success!</h1>
-      <h2>Thank you for your purchase!</h2>
-      <h2>You will now be redirected to the home page</h2>
+      <Result
+        status="success"
+        title="Your payment was successful!"
+        subTitle="Thank you for your purchase. Your order will be processed shortly."
+      // extra={[
+      //   <Button fkey="backToShop">
+      //     Back to Shop
+      //   </Button>,
+      //    <Link to="/history">
+      //   <Button key="orderHistory">View Order History</Button></Link>,
+      // ]}
+
+      />
+      <div style={{ textAlign: 'center', marginTop: '20px'}}>
+        <Spin size="large" />
+        <p style={{ marginTop: '10px'  }}>Please wait while we redirect you back to home...</p>
+      </div>
     </div>
   );
 }
