@@ -1,11 +1,27 @@
+* { 
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .App {
   text-align: center;
+  background-image: url("../assets/img.png");
+  background-size: 100%;
+  background-position: center;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+  /* filter:opacity(1); */
 }
 
 .container {
   padding: 20px;
-  background-color: hsl(33, 65%, 97%);
+  /* background-color: hsl(33, 65%, 97%); */
+
   border: 2px solid #874402;
+  /* min-height: 100vh; */
 }
 
 .layoutContainer {
@@ -137,3 +153,13 @@
 .buttonStyleAdd:hover {
   color: rgba(255, 255, 255, 1);
 } 
+
+/* Profile */
+
+.profileContainer {
+  background-color: hsl(33, 65%, 97%);
+}
+
+.profileItem {
+  margin: 10px;
+}
