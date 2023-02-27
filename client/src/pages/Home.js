@@ -1,10 +1,7 @@
 import React, { useState } from "react";
-// import { Link } from "react-router-dom";
 import Menu from "../components/Menu/Menu";
 import heroImage from "../assets/hero.jpg";
 import Nav from "../components/Nav/Nav";
-// import MenuCategory from "../components/MenuCategory/MenuCategory";
-
 import { InfoCircleFilled } from '@ant-design/icons';
 import { Button } from "antd";
 

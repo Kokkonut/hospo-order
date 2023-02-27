@@ -21,7 +21,7 @@ const orderSchema = new Schema({
 
   orderBy: {
     type: Schema.Types.ObjectId,
-    ref: 'User'
+    ref: 'Users'
   }
   
 });

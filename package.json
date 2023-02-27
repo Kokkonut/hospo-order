@@ -18,6 +18,8 @@
     "dependencies": {
         "@stripe/stripe-react-native": "^0.24.0",
         "jsonwebtoken": "^9.0.0",
-        "react-bootstrap": "^2.7.2"
+        "react-bootstrap": "^2.7.2",
+        "react-router-dom": "^5.2.0"
+   
     }
 }

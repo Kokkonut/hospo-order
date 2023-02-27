@@ -73,3 +73,11 @@ mutation updateUser(
   }
 }
 `
+export const UPDATE_ORDER_STATUS = gql`
+mutation updateOrderStatus($_id: ID!, $status: String!) {
+  updateOrderStatus(_id: $_id, status: $status) {
+    _id
+    status
+  }
+}
+`

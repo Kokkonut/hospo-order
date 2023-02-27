@@ -1,5 +1,4 @@
 export const getTimeSinceOrderPlaced = (purchaseDate) => {
-    console.log('TIME', purchaseDate);
     const currentTime = new Date();
     const elapsedTimeInSeconds = Math.floor((currentTime - new Date(purchaseDate)) / 1000);
   
